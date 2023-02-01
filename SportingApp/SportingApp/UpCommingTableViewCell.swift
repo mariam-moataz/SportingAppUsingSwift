@@ -13,8 +13,9 @@ class UpCommingTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        var nib = UINib(nibName: "HorizontalCollectionViewCell", bundle: nil)
+        upcomingColletion.delegate = self
+        upcomingColletion.dataSource = self
+        let nib = UINib(nibName: "HorizontalCollectionViewCell", bundle: nil)
         upcomingColletion.register(nib, forCellWithReuseIdentifier: "cell")
     }
 

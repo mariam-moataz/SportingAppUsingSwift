@@ -17,17 +17,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="466" height="334"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dHP-CQ-OFi">
-                        <rect key="frame" x="0.0" y="0.0" width="233" height="334"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PwX-xR-6at">
-                        <rect key="frame" x="88" y="153" width="56.666666666666657" height="28.666666666666657"/>
+                        <rect key="frame" x="205" y="153" width="56.666666666666657" height="28.666666666666657"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                         <color key="textColor" systemColor="systemYellowColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dHP-CQ-OFi">
+                        <rect key="frame" x="0.0" y="0.0" width="466" height="334"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
@@ -36,7 +36,7 @@
                 <outlet property="sportImage" destination="dHP-CQ-OFi" id="Yk3-Wg-qdT"/>
                 <outlet property="sportTitle" destination="PwX-xR-6at" id="zOZ-WN-OPi"/>
             </connections>
-            <point key="canvasLocation" x="88.549618320610676" y="-21.83098591549296"/>
+            <point key="canvasLocation" x="53" y="-17"/>
         </collectionViewCell>
     </objects>
     <resources>
