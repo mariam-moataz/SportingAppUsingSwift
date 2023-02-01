@@ -13,7 +13,9 @@ class TeamsHorizintalTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        var nib = UINib(nibName: "TeamsCollectionViewCell", bundle: nil)
+        teamsCollection.delegate = self
+        teamsCollection.dataSource = self
+      let nib = UINib(nibName: "TeamsCollectionViewCell", bundle: nil)
         teamsCollection.register(nib, forCellWithReuseIdentifier: "cell")
     }
 
@@ -32,6 +34,9 @@ extension TeamsHorizintalTableViewCell : UICollectionViewDelegate , UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)as! TeamsCollectionViewCell
+        cell.teamImg.image = UIImage(named: "burger")
+//        cell.teamImg.layer.cornerRadius = cell.teamImg.frame.width/2
+//        cell.teamImg.clipsToBounds = true
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize

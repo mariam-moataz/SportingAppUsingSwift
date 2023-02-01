@@ -13,9 +13,8 @@ class TeamsCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        teamImg.layer.cornerRadius = teamImg.frame.width/2
-        teamImg.clipsToBounds = true
-        teamImg.image = UIImage(named: "load")
+       
+        
     }
 
 }

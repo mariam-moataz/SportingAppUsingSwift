@@ -8,7 +8,13 @@
 import UIKit
 
 class HorizontalCollectionViewCell: UICollectionViewCell {
-
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    
+    @IBOutlet weak var timeLabel: UILabel!
+    
+    
+    
     @IBOutlet weak var eventNameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()

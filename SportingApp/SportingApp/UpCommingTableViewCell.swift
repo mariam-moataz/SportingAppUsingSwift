@@ -35,7 +35,8 @@ extension UpCommingTableViewCell : UICollectionViewDelegate , UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)as! HorizontalCollectionViewCell
         cell.eventNameLabel.text = "Hello"
-
+        cell.dateLabel.text = "25/2/2030"
+        cell.timeLabel.text = "30:50:20"
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
