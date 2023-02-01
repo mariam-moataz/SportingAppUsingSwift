@@ -1,0 +1,43 @@
+//
+//  TeamsHorizintalTableViewCell.swift
+//  SportingApp
+//
+//  Created by Eman on 01/02/2023.
+//
+
+import UIKit
+
+class TeamsHorizintalTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var teamsCollection: UICollectionView!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        var nib = UINib(nibName: "TeamsCollectionViewCell", bundle: nil)
+        teamsCollection.register(nib, forCellWithReuseIdentifier: "cell")
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+    
+}
+extension TeamsHorizintalTableViewCell : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout
+{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)as! TeamsCollectionViewCell
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+        {
+            //(UIScreen.main.bounds.size.width/2.0)
+           return CGSize(width:100, height: 100)
+        }
+    
+}
