@@ -9,6 +9,9 @@ import UIKit
 
 class LeguesDetailsTableViewController: UITableViewController {
 
+    @IBOutlet weak var staroutlet: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let nib = UINib(nibName: "UpCommingTableViewCell", bundle: nil)
@@ -71,5 +74,10 @@ class LeguesDetailsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+
+    @IBAction func staract(_ sender: UIButton) {
+        staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
+
     }
 }
