@@ -6,8 +6,7 @@
 //
 
 import UIKit
-
-//private let reuseIdentifier = "Cell"
+import Alamofire
 
 class SportsCollectionViewController: UICollectionViewController {
 
