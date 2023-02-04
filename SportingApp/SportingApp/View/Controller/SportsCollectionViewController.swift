@@ -9,16 +9,11 @@ import UIKit
 import Alamofire
 
 class SportsCollectionViewController: UICollectionViewController {
-
-    var arr = ["Mariam","Eman","x","z","g","y","t"]
+    
+    var sports = getSports()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        let nib = UINib(nibName: "SportsCollectionViewCell", bundle: nil)
-//        collectionView.register(nib, forCellWithReuseIdentifier: "cell")
-        
-
     }
 
 
@@ -29,14 +24,14 @@ class SportsCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return arr.count
+        return sports.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? SportCollectionViewCell
         
-        cell!.imageVIew.image = UIImage(named: "burger")
-        //cell!.sportTitle.text = arr[indexPath.row]
+        cell!.imageVIew.image = UIImage(named: sports[indexPath.row].image!)
+        cell!.sportLabel.text = sports[indexPath.row].name
 
         return cell!
     }
@@ -49,13 +44,14 @@ class SportsCollectionViewController: UICollectionViewController {
 }
 
 extension SportsCollectionViewController : UICollectionViewDelegateFlowLayout{
-    
-    /*func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
         {
         let w = collectionView.frame.size.width/2-30
         //let h = collectionView.frame.size.height/4+70
         let h = collectionView.frame.size.width/2-30
         return CGSize(width: w, height: h)
-        }*/
+        }
     
 }
+
+

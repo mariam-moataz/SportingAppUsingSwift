@@ -11,7 +11,6 @@ class TableViewCell: UITableViewCell {
 
     @IBOutlet weak var favoriteLeagueName: UILabel!
     @IBOutlet weak var favoriteLeagueImage: UIImageView!
-    @IBOutlet weak var watchVideoButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

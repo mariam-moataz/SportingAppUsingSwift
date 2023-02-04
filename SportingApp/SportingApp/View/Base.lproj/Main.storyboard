@@ -25,7 +25,7 @@
             </objects>
             <point key="canvasLocation" x="28" y="65"/>
         </scene>
-        <!--Item-->
+        <!--Favorite Table View Controller-->
         <scene sceneID="jxV-CD-DUX">
             <objects>
                 <tableViewController id="Wh7-jJ-h00" customClass="FavoriteTableViewController" customModule="SportingApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -52,7 +52,7 @@
                             <outlet property="delegate" destination="Wh7-jJ-h00" id="Caq-GW-Sac"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="mjC-1U-Uca"/>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="mjC-1U-Uca"/>
                     <navigationItem key="navigationItem" id="KR6-hF-ZTx"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zoh-Rw-PXs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -128,11 +128,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="190" height="180"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9c-Xa-IX6">
+                                            <rect key="frame" x="2" y="83" width="185" height="15"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.84341159249999997" green="0.78600349089999999" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </collectionViewCellContentView>
                                 <connections>
                                     <outlet property="imageVIew" destination="rJU-3b-pH5" id="zM6-DI-IVy"/>
+                                    <outlet property="sportLabel" destination="R9c-Xa-IX6" id="cNH-ve-Pzi"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -147,11 +155,11 @@
             </objects>
             <point key="canvasLocation" x="1713.740458015267" y="-768.30985915492965"/>
         </scene>
-        <!--Item-->
+        <!--Sports-->
         <scene sceneID="C9O-pb-4z4">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5Qy-Lp-Ka3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="hjC-o4-otd"/>
+                    <tabBarItem key="tabBarItem" title="Sports" id="hjC-o4-otd"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Opz-PH-vJq">
                         <rect key="frame" x="0.0" y="59" width="393" height="96"/>
@@ -168,6 +176,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VoZ-60-CCh"/>
+        <segue reference="N0r-c4-gMf"/>
     </inferredMetricsTieBreakers>
 </document>

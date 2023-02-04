@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "NSURLSession.request&lt;&#x3c4;_0_0&gt;(endPoint:expecting:handler:):APIHandler.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "url">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "LeaguesTableViewController.tableView(_:numberOfRowsInSection:):LeaguesTableViewController.swift">
          <PersistentStrings>
             <PersistentString

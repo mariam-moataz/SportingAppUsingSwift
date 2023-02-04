@@ -6,40 +6,25 @@
 //
 
 import UIKit
+import Kingfisher
 
 class LeaguesTableViewController: UITableViewController {
 
-    var leagues : Array<League> = []
-
+    var leagues : [LeagueDetails]=[]
+    var result : APIResponse?
+    var viewModel : SportsViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         nipFileConfig()
-        //fetch()
-        //let url = URL(string: "https://www.thesportsdb.com/api/v1/json/3/all_leagues.php")
-//        APIHandler.sharedInstance.fetchApi(url: url){ data in
-//            self.leagues = data
-//        }
+        viewModel = SportsViewModel()
+        viewModel.getItems()
+        viewModel.bindResultToTableViewController = { () in  self.renderView(legues: self.viewModel.vmResult)}
     }
 
     // MARK: - Table view data source
 
- /*   func fetch(){
-        let url = URL(string: "https://imdb-api.com/en/API/BoxOffice/k_ll086m9b")
-        URLSession.shared.request(url: url, expecting: [Result].self){  result in
-            switch result{
-                case .success(let leagues):
-                    DispatchQueue.main.async{
-                        self.leagues = leagues
-                    self.tableView.reloadData()
-                }
-            case .failure(let error):
-                print(error)
-            }
-            
-            
-        }
-    }*/
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -50,8 +35,9 @@ class LeaguesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
-        //cell.favoriteLeagueName?.text = leagues[indexPath.row].name_en
-        //cell.favoriteLeagueImage?.image = UIImage(named: leagues[indexPath.row].)
+        cell.favoriteLeagueName?.text = leagues[indexPath.row].league_name
+        var url = URL(string: leagues[indexPath.row].league_logo ?? "")
+        cell.favoriteLeagueImage?.kf.setImage(with: url,placeholder: UIImage(named: "football"))
         return cell
     }
     
@@ -71,4 +57,13 @@ extension LeaguesTableViewController{
         let nib = UINib(nibName: "TableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "cell")
     }
+    
+    func renderView(legues: [LeagueDetails]?){
+        guard let newItems = legues else{return}
+        self.leagues = newItems
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 }
+
