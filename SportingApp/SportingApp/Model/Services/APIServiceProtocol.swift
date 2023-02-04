@@ -6,6 +6,6 @@
 //
 
 import Foundation
-protocol APIServiceProtocol{
+/*protocol APIServiceProtocol{
     func fetchApi(endPoint: String, completion: @escaping ((APIResponse?, Error?) -> Void))
-}
+}*/

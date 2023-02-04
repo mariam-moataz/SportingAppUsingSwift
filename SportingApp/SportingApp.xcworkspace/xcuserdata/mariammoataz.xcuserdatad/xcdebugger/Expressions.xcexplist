@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #1 in APIHandler.fetchApi(endPoint:Resonse:handler:):APIHandler.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "jsonData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "NSURLSession.request&lt;&#x3c4;_0_0&gt;(endPoint:expecting:handler:):APIHandler.swift">
          <PersistentStrings>
             <PersistentString

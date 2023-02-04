@@ -7,13 +7,10 @@
 
 import Foundation
 
-//class APIResponse<T:Decodable> : Decodable{
-//    var success : Int?
-//    var result : [T]?
-//}
 
 
-class LeagueAPIResponse : Decodable{
+
+class LeagueAPIResponse : Decodable {
     var success : Int?
     var result : [LeagueDetails]?
 }

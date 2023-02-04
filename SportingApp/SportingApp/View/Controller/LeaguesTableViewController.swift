@@ -11,14 +11,13 @@ import Kingfisher
 class LeaguesTableViewController: UITableViewController {
 
     var leagues : [LeagueDetails]=[]
-    var result : APIResponse?
-    var viewModel : SportsViewModel!
+    var viewModel : LeagueViewModel!
     var endpoint : String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nipFileConfig()
-        viewModel = SportsViewModel()
+        viewModel = LeagueViewModel()
         viewModel.getItems(endpoint:self.endpoint)
         viewModel.bindResultToTableViewController = { () in  self.renderView(legues: self.viewModel.vmResult)}
     }
