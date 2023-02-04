@@ -13,7 +13,7 @@ class APIHandler
 {
     
  static let sharedInstance = APIHandler()
-    func fetchApi(endPoint: String, handler: @escaping(_ leagueData:(APIResponse?))->(Void))
+    func fetchApi(endPoint: String, res : Any, handler: @escaping (APIResponse?)->(Void))
     {
         //https://allsportsapi.com/admin/
         guard let url = URL(string: URLService(endPoint: endPoint).url) else{return}
@@ -22,7 +22,9 @@ class APIHandler
             switch response.result{
             case .success(let data):
                 do{
-                    let jsonData = try JSONDecoder().decode(APIResponse.self, from: data!)
+                    //let jsonData = try JSONDecoder().decode(APIResponse.self, from: data!)
+                    //let decodedArray:[User] = convertFromJson(data: data) ?? []
+                    let jsonData : APIResponse = convertFromJson(data: data!) as! APIResponse
                     handler(jsonData)
                 }catch{
                     print(error.localizedDescription)

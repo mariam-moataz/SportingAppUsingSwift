@@ -13,5 +13,5 @@ class TeamDetails : Decodable{
     var team_name : String?
     var team_logo : String?
     var players : [PlayerDetails]?
-    //var choach
+    var choachs : [CoachDetails]
 }

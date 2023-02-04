@@ -10,5 +10,5 @@ import Foundation
 class CoachDetails : Decodable{
     var coach_name : String?
     var coach_country : String?
-    var coach_age : String?//<<<<<<<<
+    var coach_age : String?
 }

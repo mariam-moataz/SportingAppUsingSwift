@@ -16,7 +16,7 @@ class SportsCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
     }
 
-
+    
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -38,6 +38,16 @@ class SportsCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let leaguesTableViewController : LeaguesTableViewController = self.storyboard?.instantiateViewController(withIdentifier: "leaguesTVC") as! LeaguesTableViewController
+        switch sports[indexPath.row].endPoint{
+        case "football":
+            leaguesTableViewController.endpoint = "football"
+        case "basketball":
+            leaguesTableViewController.endpoint = "basketball"
+        case "cricket":
+            leaguesTableViewController.endpoint = "cricket"
+        default:
+            leaguesTableViewController.endpoint = ""
+        }
         self.navigationController?.pushViewController(leaguesTableViewController, animated: true)
     }
     

@@ -8,14 +8,14 @@
 import Foundation
 
 func getSports() -> [Sport]{
-    let football = Sport(name:"Football",image:"football")
-    let basketball = Sport(name:"Basketball",image:"basketball")
-    let baseball = Sport(name:"Baseball",image:"baseball")
-    let cricket = Sport(name:"Cricket",image:"cricket")
-    let americanFootball = Sport(name:"American football",image:"americanFootball")
-    let volleyball = Sport(name:"Volleyball",image:"volleyball")
-    let golf = Sport(name:"Golf",image:"golfball")
-    let hockey = Sport(name:"Hockey",image:"hockey")
+    let football = Sport(name:"Football",image:"football",endPoint: "football")
+    let basketball = Sport(name:"Basketball",image:"basketball",endPoint: "basketball")
+    let cricket = Sport(name:"Cricket",image:"cricket",endPoint: "cricket")
+    let baseball = Sport(name:"Baseball",image:"baseball",endPoint: nil)
+    let americanFootball = Sport(name:"American football",image:"americanFootball",endPoint: nil)
+    let volleyball = Sport(name:"Volleyball",image:"volleyball",endPoint: nil)
+    let golf = Sport(name:"Golf",image:"golfball",endPoint: nil)
+    let hockey = Sport(name:"Hockey",image:"hockey",endPoint: nil)
     
     var sports : [Sport] = []
     sports.append(football)

@@ -13,8 +13,17 @@ import Foundation
 //}
 
 
-class APIResponse : Decodable{
+class LeagueAPIResponse : Decodable{
     var success : Int?
     var result : [LeagueDetails]?
 }
 
+class TeamAPIResponse : Decodable{
+    var success : Int?
+    var result : [TeamDetails]?
+}
+
+class EventAPIResponse : Decodable{
+    var success : Int?
+    var result : [EventDetails]?
+}

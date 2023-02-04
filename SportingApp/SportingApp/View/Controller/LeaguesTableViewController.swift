@@ -13,12 +13,13 @@ class LeaguesTableViewController: UITableViewController {
     var leagues : [LeagueDetails]=[]
     var result : APIResponse?
     var viewModel : SportsViewModel!
+    var endpoint : String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nipFileConfig()
         viewModel = SportsViewModel()
-        viewModel.getItems()
+        viewModel.getItems(endpoint:self.endpoint)
         viewModel.bindResultToTableViewController = { () in  self.renderView(legues: self.viewModel.vmResult)}
     }
 
@@ -36,8 +37,15 @@ class LeaguesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
         cell.favoriteLeagueName?.text = leagues[indexPath.row].league_name
-        var url = URL(string: leagues[indexPath.row].league_logo ?? "")
-        cell.favoriteLeagueImage?.kf.setImage(with: url,placeholder: UIImage(named: "football"))
+        switch endpoint{
+        case "basketball":
+            cell.favoriteLeagueImage?.image = UIImage(named: "basketball")
+        case "cricket":
+            cell.favoriteLeagueImage?.image = UIImage(named: "cricket")
+        default:
+            let url = URL(string: leagues[indexPath.row].league_logo ?? "")
+            cell.favoriteLeagueImage?.kf.setImage(with: url,placeholder: UIImage(named: "football"))
+        }
         return cell
     }
     
