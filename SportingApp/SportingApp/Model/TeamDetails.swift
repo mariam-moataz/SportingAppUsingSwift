@@ -15,3 +15,4 @@ class TeamDetails : Decodable{
     var players : [PlayerDetails]?
     var choachs : [CoachDetails]
 }
+//https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=96&APIkey=!_your_account_APIkey_!

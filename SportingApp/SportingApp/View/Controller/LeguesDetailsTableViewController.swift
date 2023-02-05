@@ -10,16 +10,24 @@ import UIKit
 class LeguesDetailsTableViewController: UITableViewController {
 
     @IBOutlet weak var staroutlet: UIButton!
-    
-    
+//    init?(coder: NSCoder, endpoint: String?) {
+//        self.endpoint = endpoint
+//        super.init(coder: coder)
+//    }
+//    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    var viewModel : LeagueDetailsViewModel!
+    var endpoint : String!
+     var events: [EventDetails]=[]
     override func viewDidLoad() {
         super.viewDidLoad()
-        let nib = UINib(nibName: "UpCommingTableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "cell1")
-        let nib2 = UINib(nibName: "VerticalTableViewCell", bundle: nil)
-        tableView.register(nib2, forCellReuseIdentifier: "cell2")
-        let nib3 = UINib(nibName: "TeamsHorizintalTableViewCell", bundle: nil)
-        tableView.register(nib3, forCellReuseIdentifier: "cell3")
+        
+        nipFileConfig()
+        viewModel = LeagueDetailsViewModel()
+        viewModel.getItems(url:getURL())
+        viewModel.bindResultToTableViewController = { () in  self.renderView(events: self.viewModel.vmResult)}
         
     }
 
@@ -39,7 +47,7 @@ class LeguesDetailsTableViewController: UITableViewController {
 
         case 1 :
 //
-           return 10
+            return events.count
 
 //        case 2 :
 //
@@ -56,11 +64,16 @@ class LeguesDetailsTableViewController: UITableViewController {
         case 0 :
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! UpCommingTableViewCell
+            
             return cell
 
         case 1 :
 
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! VerticalTableViewCell
+            cell.TimeLabel.text  = events[indexPath.row].event_time
+            cell.scoreLabel.text = events[indexPath.row].event_final_result
+            cell.teamNAmeLabel.text = events[indexPath.row].event_home_team
+            cell.datelabel.text = events[indexPath.row].event_date
             return cell
 
         default:
@@ -79,5 +92,28 @@ class LeguesDetailsTableViewController: UITableViewController {
     @IBAction func staract(_ sender: UIButton) {
         staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
 
+    }
+    
+}
+extension LeguesDetailsTableViewController{
+    func nipFileConfig(){
+        let nib = UINib(nibName: "UpCommingTableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "cell1")
+        let nib2 = UINib(nibName: "VerticalTableViewCell", bundle: nil)
+        tableView.register(nib2, forCellReuseIdentifier: "cell2")
+        let nib3 = UINib(nibName: "TeamsHorizintalTableViewCell", bundle: nil)
+        tableView.register(nib3, forCellReuseIdentifier: "cell3")
+    }
+    
+    func renderView(events: [EventDetails]?){
+        guard let newItems = events else{return}
+        self.events = newItems
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    func getURL()-> URL{
+        let url = URL(string: URLServiceForEvent(endPoint: "football" ,fromDate: "2019-03-13",toDate: "2019-03-13").url)!
+        return url
     }
 }

@@ -1,15 +1,14 @@
 //
-//  LeagueViewModel.swift
+//  UpComingViewModel.swift
 //  SportingApp
 //
-//  Created by Mariam Moataz on 05/02/2023.
+//  Created by Eman on 05/02/2023.
 //
 
 import Foundation
-
-class LeagueViewModel{
+class UpComingViewModel {
     var bindResultToTableViewController : (()->()) = {}
-    var vmResult : [LeagueDetails]?{
+    var vmResult : [EventDetails]?{
         didSet{
             bindResultToTableViewController() //render
         }
@@ -17,9 +16,9 @@ class LeagueViewModel{
     
     //get data from model
     func getItems(url:URL){
-        let response = LeagueAPIResponse()
-        APIHandler.sharedInstance.fetchApi(url: url , resonsee: response){ result in
-            guard let result = result as? LeagueAPIResponse else{
+        let response = EventAPIResponse()
+        APIHandler.sharedInstance.fetchApi(url:url , resonsee: response){ result in
+            guard let result = result as? EventAPIResponse else{
                 print("error")
                 return}
             self.vmResult = result.result
@@ -28,4 +27,3 @@ class LeagueViewModel{
     }
 
 }
-

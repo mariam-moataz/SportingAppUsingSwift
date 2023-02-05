@@ -18,7 +18,7 @@ class LeaguesTableViewController: UITableViewController {
         super.viewDidLoad()
         nipFileConfig()
         viewModel = LeagueViewModel()
-        viewModel.getItems(endpoint:self.endpoint)
+        viewModel.getItems(url:getURL())
         viewModel.bindResultToTableViewController = { () in  self.renderView(legues: self.viewModel.vmResult)}
     }
 
@@ -47,10 +47,23 @@ class LeaguesTableViewController: UITableViewController {
         }
         return cell
     }
-    
+ 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        leagues[indexPath.row].league_key
+        let tableL = LeguesDetailsTableViewController()
+         tableL.endpoint = "football"
         performSegue(withIdentifier: "leagueSegue", sender: nil)
+     
+        
     }
+
+    
+//    @IBSegueAction func seg(_ coder: NSCoder) -> UITableViewController? {
+//        performSegue(withIdentifier: "leagueSegue", sender: nil)
+//        return LeguesDetailsTableViewController(coder: coder, endpoint: "football")
+//    }
+    
+    
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
@@ -71,6 +84,10 @@ extension LeaguesTableViewController{
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+    }
+    func getURL()-> URL{
+        var url = URL(string: URLService(endPoint: self.endpoint).url)!
+        return url
     }
 }
 
