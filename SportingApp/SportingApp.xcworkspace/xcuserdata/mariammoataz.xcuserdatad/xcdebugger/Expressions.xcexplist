@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "closure #1 in APIHandler.fetchApi(endPoint:Resonse:handler:):APIHandler.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "jsonData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NSURLSession.request&lt;&#x3c4;_0_0&gt;(endPoint:expecting:handler:):APIHandler.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "url">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LeaguesTableViewController.tableView(_:numberOfRowsInSection:):LeaguesTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "leagues.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
