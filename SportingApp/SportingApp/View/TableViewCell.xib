@@ -20,22 +20,13 @@
                         <rect key="frame" x="210" y="15" width="129" height="125"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HeC-EP-EZ0">
-                        <rect key="frame" x="20" y="33" width="98" height="29"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HeC-EP-EZ0">
+                        <rect key="frame" x="20" y="15" width="182" height="125"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1NS-4W-dbE">
-                        <rect key="frame" x="20" y="98" width="35" height="35"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="gray" image="video" catalog="system" title="" cornerStyle="capsule">
-                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <color key="baseBackgroundColor" red="0.30489398099999998" green="0.34015485540000001" blue="0.55073168210000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </buttonConfiguration>
-                    </button>
                 </subviews>
                 <color key="backgroundColor" red="0.84965673360000005" green="0.85231505610000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             </tableViewCellContentView>
@@ -43,12 +34,8 @@
             <connections>
                 <outlet property="favoriteLeagueImage" destination="T4o-wc-NKM" id="iz2-rt-myX"/>
                 <outlet property="favoriteLeagueName" destination="HeC-EP-EZ0" id="ZfY-T6-wyY"/>
-                <outlet property="watchVideoButton" destination="1NS-4W-dbE" id="FfG-qs-QXy"/>
             </connections>
             <point key="canvasLocation" x="-16.744186046511629" y="45.386266094420606"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="video" catalog="system" width="128" height="82"/>
-    </resources>
 </document>

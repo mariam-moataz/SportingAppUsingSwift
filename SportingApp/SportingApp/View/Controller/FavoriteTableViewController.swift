@@ -9,6 +9,11 @@ import UIKit
 
 class FavoriteTableViewController: UITableViewController {
 
+    
+//    @IBSegueAction func segue(_ coder: NSCoder) -> UITableViewController? {
+//        return LeguesDetailsTableViewController(coder: coder)
+//    }
+    
     let arr = ["1","2","3"]
     
     override func viewDidLoad() {
@@ -33,6 +38,13 @@ class FavoriteTableViewController: UITableViewController {
         cell.favoriteLeagueImage?.image = UIImage(named: "load")
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "favoriteSegue", sender: nil)
+    }
+    
+    
+    
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150

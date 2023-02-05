@@ -8,7 +8,9 @@
 import UIKit
 
 class TeamsHorizintalTableViewCell: UITableViewCell {
-
+    var table = LeguesDetailsTableViewController()
+  //  var collec = 
+    var computedArray: [EventDetails]=[]
     @IBOutlet weak var teamsCollection: UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
