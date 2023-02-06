@@ -10,18 +10,11 @@ import UIKit
 class LeguesDetailsTableViewController: UITableViewController {
 
     @IBOutlet weak var staroutlet: UIButton!
-//    init?(coder: NSCoder, endpoint: String?) {
-//        self.endpoint = endpoint
-//        super.init(coder: coder)
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    
     var viewModel : LeagueDetailsViewModel!
     var endpoint : String?
     var leagueID : Int?
-    var events: [EventDetails]=[]
+    var latestResults: [EventDetails]=[] //latest results
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +22,6 @@ class LeguesDetailsTableViewController: UITableViewController {
         viewModel = LeagueDetailsViewModel()
         viewModel.getItems(url:getURL())
         viewModel.bindResultToTableViewController = { () in  self.renderView(events: self.viewModel.vmResult)}
-        
     }
 
     // MARK: - Table view data source
@@ -40,11 +32,9 @@ class LeguesDetailsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch (section){
-        case 0 : //upcomming events
-            return 1
-        case 1 : //latest results
-            return events.count
-        default://teams
+        case 1: //latest results
+            return latestResults.count
+        default://upcomming events & teams
            return 1
         }
     }
@@ -52,17 +42,15 @@ class LeguesDetailsTableViewController: UITableViewController {
   
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch (indexPath.section){
-        case 0 :
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! UpCommingTableViewCell
-            cell.leagueID = self.leagueID
-            cell.endpoint = self.endpoint
+        case 0 : //upcomming events
+            var cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! UpCommingTableViewCell
             return cell
-        case 1 :
+        case 1 : //latest events
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! VerticalTableViewCell
-            cell.TimeLabel.text  = events[indexPath.row].event_time
-            cell.scoreLabel.text = events[indexPath.row].event_final_result
-            cell.teamNAmeLabel.text = events[indexPath.row].event_home_team ?? "" + "VS" +  (events[indexPath.row].event_away_team ?? "")
-            cell.datelabel.text = events[indexPath.row].event_date
+            cell.TimeLabel.text  = latestResults[indexPath.row].event_time
+            cell.scoreLabel.text = latestResults[indexPath.row].event_final_result
+            cell.teamNAmeLabel.text = latestResults[indexPath.row].event_home_team ?? "" + "VS" +  (latestResults[indexPath.row].event_away_team ?? "")
+            cell.datelabel.text = latestResults[indexPath.row].event_date
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell3", for: indexPath) as! TeamsHorizintalTableViewCell
@@ -70,8 +58,9 @@ class LeguesDetailsTableViewController: UITableViewController {
         }
     }
     
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 280
     }
 
     @IBAction func staract(_ sender: UIButton) {
@@ -92,13 +81,13 @@ extension LeguesDetailsTableViewController{
     
     func renderView(events: [EventDetails]?){
         guard let newItems = events else{return}
-        self.events = newItems
+        self.latestResults = newItems
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
     func getURL()-> URL{
-        let url = URL(string: URLServiceForEvent(endPoint: self.endpoint ?? "", fromDate: "2023-01-18",toDate: "2024-01-18",leagueID: String(leagueID.self ?? 0)).url)!
+        let url = URL(string: URLServiceForEvent(endPoint: self.endpoint ?? "", fromDate: "2022-01-18",toDate: "2023-01-18",leagueID: String(leagueID.self ?? 0)).url)!
         return url
     }
 }

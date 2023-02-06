@@ -20,7 +20,7 @@ class TeamsHorizintalTableViewCell: UITableViewCell {
         teamsCollection.dataSource = self
       let nib = UINib(nibName: "TeamsCollectionViewCell", bundle: nil)
         teamsCollection.register(nib, forCellWithReuseIdentifier: "cell")
-        computedArray = table.events + upCommingViewCell.events
+        computedArray = table.latestResults + upCommingViewCell.events
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

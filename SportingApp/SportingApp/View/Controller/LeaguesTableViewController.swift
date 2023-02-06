@@ -14,6 +14,7 @@ class LeaguesTableViewController: UITableViewController {
     var viewModel : LeagueViewModel!
     var endpoint : String!
     var leagueID : Int!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         nipFileConfig()
@@ -45,6 +46,8 @@ class LeaguesTableViewController: UITableViewController {
             cell.favoriteLeagueImage?.image = UIImage(named: "basketball")
         case "cricket":
             cell.favoriteLeagueImage?.image = UIImage(named: "cricket")
+        case "tennis":
+            cell.favoriteLeagueImage?.image = UIImage(named: "tennis")
         default:
             let url = URL(string: leagues[indexPath.row].league_logo ?? "")
             cell.favoriteLeagueImage?.kf.setImage(with: url,placeholder: UIImage(named: "football"))
@@ -62,6 +65,7 @@ class LeaguesTableViewController: UITableViewController {
             let vc = segue.destination as? LeguesDetailsTableViewController
             vc!.leagueID = self.leagueID
             vc!.endpoint = self.endpoint
+            
         }
     }
     
@@ -72,7 +76,17 @@ class LeaguesTableViewController: UITableViewController {
     
 }
     
-
+extension LeaguesTableViewController : DelegateProtocol{
+    func getLeagueId() -> (Int) {
+        return self.leagueID
+    }
+    
+    func getEndpointId() -> (String) {
+        return self.endpoint
+    }
+    
+    
+}
 extension LeaguesTableViewController{
     func nipFileConfig(){
         let nib = UINib(nibName: "TableViewCell", bundle: nil)

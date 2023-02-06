@@ -10,19 +10,21 @@ import UIKit
 class UpCommingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var upcomingColletion: UICollectionView!
+    var delegateObj : DelegateProtocol!
     var viewModel : UpComingViewModel!
     var events: [EventDetails]=[]
     var endpoint : String?
     var leagueID : Int?
+    var index : Int?
+
     override func awakeFromNib() {
         super.awakeFromNib()
+        upcomingColletion.delegate = self
+        upcomingColletion.dataSource = self
         nipFileConfig()
         viewModel = UpComingViewModel()
         viewModel.getItems(url:getURL())
         viewModel.bindResultToTableViewController = { () in  self.renderView(events: self.viewModel.vmResult)}
-        upcomingColletion.delegate = self
-        upcomingColletion.dataSource = self
-       
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -43,12 +45,13 @@ extension UpCommingTableViewCell : UICollectionViewDelegate , UICollectionViewDa
         cell.eventNameLabel.text = events[indexPath.row].league_name
         cell.dateLabel.text = events[indexPath.row].event_date
         cell.timeLabel.text = events[indexPath.row].event_time
+        leagueID = events[indexPath.row].league_key
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
         {
             //(UIScreen.main.bounds.size.width/2.0)
-           return CGSize(width:100, height: 100)
+           return CGSize(width:280, height: 280)
         }
     
 }
@@ -66,7 +69,12 @@ extension UpCommingTableViewCell{
         }
     }
     func getURL()-> URL{
-        let url = URL(string: URLServiceForEvent(endPoint: "football" ,fromDate: "2019-03-13",toDate: "2019-03-13").url)!
+        //endpoint = delegateObj.getEndpointId()
+        //leagueID = delegateObj.getLeagueId()
+        endpoint = "football"
+        leagueID = 205
+        let url = URL(string: URLServiceForEvent(endPoint: self.endpoint ?? "", fromDate: "2023-01-18",toDate: "2024-01-18",leagueID: String(leagueID.self ?? 0)).url)!
         return url
     }
 }
+

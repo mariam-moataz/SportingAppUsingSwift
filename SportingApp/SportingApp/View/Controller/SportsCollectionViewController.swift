@@ -64,6 +64,8 @@ func getSportEndPoint(endpoint: String) -> (String){
         endpointTobeReturned = "basketball"
     case "cricket":
         endpointTobeReturned = "cricket"
+    case "tennis":
+        endpointTobeReturned = "tennis"
     default:
         endpointTobeReturned = ""
     }
