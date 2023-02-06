@@ -9,8 +9,9 @@ import UIKit
 
 class TeamsHorizintalTableViewCell: UITableViewCell {
     var table = LeguesDetailsTableViewController()
-  //  var collec = 
+    var upCommingViewCell = UpCommingTableViewCell()
     var computedArray: [EventDetails]=[]
+    
     @IBOutlet weak var teamsCollection: UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,6 +20,7 @@ class TeamsHorizintalTableViewCell: UITableViewCell {
         teamsCollection.dataSource = self
       let nib = UINib(nibName: "TeamsCollectionViewCell", bundle: nil)
         teamsCollection.register(nib, forCellWithReuseIdentifier: "cell")
+        computedArray = table.events + upCommingViewCell.events
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -25,7 +25,6 @@ class APIHandler
             case .success(let data):
                 
                 switch responsee {
-                    
                 case is LeagueAPIResponse :
                     let jsonData : LeagueAPIResponse = convertFromJson(data: data!)
                     handler(jsonData)

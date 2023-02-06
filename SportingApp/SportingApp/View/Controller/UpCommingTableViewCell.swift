@@ -12,6 +12,8 @@ class UpCommingTableViewCell: UITableViewCell {
     @IBOutlet weak var upcomingColletion: UICollectionView!
     var viewModel : UpComingViewModel!
     var events: [EventDetails]=[]
+    var endpoint : String?
+    var leagueID : Int?
     override func awakeFromNib() {
         super.awakeFromNib()
         nipFileConfig()
