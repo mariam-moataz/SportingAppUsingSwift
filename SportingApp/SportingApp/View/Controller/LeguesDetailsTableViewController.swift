@@ -18,16 +18,37 @@ class LeguesDetailsTableViewController: UITableViewController {
 //    required init?(coder: NSCoder) {
 //        fatalError("init(coder:) has not been implemented")
 //    }
+    var que = OperationQueue()
     var viewModel : LeagueDetailsViewModel!
     var endpoint : String!
      var events: [EventDetails]=[]
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let operationTwo = BlockOperation
+//        {
+//           print ("two")
+            
+                self.nipFileConfig()
+         
+            
+//        }
+//
+//
+//        let operationOne = BlockOperation
+//        {
+       //     print("one")
+            self.viewModel = LeagueDetailsViewModel()
+            self.viewModel.getItems(url:self.getURL())
+            self.viewModel.bindResultToTableViewController = { () in  self.renderView(events: self.viewModel.vmResult)}
+            
+//        }
+//
+//
+//
+//        operationTwo.addDependency(operationOne)
+//        que.addOperations([operationOne,operationTwo], waitUntilFinished: true)
         
-        nipFileConfig()
-        viewModel = LeagueDetailsViewModel()
-        viewModel.getItems(url:getURL())
-        viewModel.bindResultToTableViewController = { () in  self.renderView(events: self.viewModel.vmResult)}
+        
         
     }
 

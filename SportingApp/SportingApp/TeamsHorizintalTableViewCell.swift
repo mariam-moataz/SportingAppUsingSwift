@@ -8,16 +8,11 @@
 import UIKit
 
 class TeamsHorizintalTableViewCell: UITableViewCell {
-    var table = LeguesDetailsTableViewController()
-    var upcoming = UpCommingTableViewCell()
- 
-  
-    var computedArray: [EventDetails]=[]
+
     @IBOutlet weak var teamsCollection: UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        computedArray = upcoming.events  + table.events
         teamsCollection.delegate = self
         teamsCollection.dataSource = self
       let nib = UINib(nibName: "TeamsCollectionViewCell", bundle: nil)
@@ -34,7 +29,7 @@ class TeamsHorizintalTableViewCell: UITableViewCell {
 extension TeamsHorizintalTableViewCell : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout
 {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return computedArray.count
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
