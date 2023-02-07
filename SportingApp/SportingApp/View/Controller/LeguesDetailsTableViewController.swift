@@ -11,17 +11,23 @@ class LeguesDetailsTableViewController: UITableViewController {
 
     @IBOutlet weak var staroutlet: UIButton!
     
-    var viewModel : LeagueDetailsViewModel!
+    var latestResultViewModel : LeagueDetailsViewModel!
     var endpoint : String?
     var leagueID : Int?
-    var latestResults: [EventDetails]=[] //latest results
+    static var latestResults: [EventDetails]=[] //latest results
+    //var upCommingEvents: [EventDetails]=[] //Upcomming
     
     override func viewDidLoad() {
+        var operationQueue = OperationQueue()
+        
         super.viewDidLoad()
         nipFileConfig()
-        viewModel = LeagueDetailsViewModel()
-        viewModel.getItems(url:getURL())
-        viewModel.bindResultToTableViewController = { () in  self.renderView(events: self.viewModel.vmResult)}
+        latestResultViewModel = LeagueDetailsViewModel()
+        let LatestResultsOperation = BlockOperation {
+            self.latestResultViewModel.getItems(url:self.getURL())//<<<<<Latest Results
+            self.latestResultViewModel.bindResultToTableViewController = { () in  self.renderView(events: self.latestResultViewModel.vmResult)}
+            operationQueue
+        }
     }
 
     // MARK: - Table view data source
@@ -33,7 +39,7 @@ class LeguesDetailsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch (section){
         case 1: //latest results
-            return latestResults.count
+            return LeguesDetailsTableViewController.latestResults.count
         default://upcomming events & teams
            return 1
         }
@@ -43,14 +49,17 @@ class LeguesDetailsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch (indexPath.section){
         case 0 : //upcomming events
+            UpCommingTableViewCell.endpoint = endpoint
+            UpCommingTableViewCell.leagueID = leagueID
             var cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! UpCommingTableViewCell
             return cell
+            
         case 1 : //latest events
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! VerticalTableViewCell
-            cell.TimeLabel.text  = latestResults[indexPath.row].event_time
-            cell.scoreLabel.text = latestResults[indexPath.row].event_final_result
-            cell.teamNAmeLabel.text = latestResults[indexPath.row].event_home_team ?? "" + "VS" +  (latestResults[indexPath.row].event_away_team ?? "")
-            cell.datelabel.text = latestResults[indexPath.row].event_date
+            cell.TimeLabel.text  = LeguesDetailsTableViewController.latestResults[indexPath.row].event_time
+            cell.scoreLabel.text = LeguesDetailsTableViewController.latestResults[indexPath.row].event_final_result
+            cell.teamNAmeLabel.text = LeguesDetailsTableViewController.latestResults[indexPath.row].event_home_team ?? "" + "VS" +  (LeguesDetailsTableViewController.latestResults[indexPath.row].event_away_team ?? "")
+            cell.datelabel.text = LeguesDetailsTableViewController.latestResults[indexPath.row].event_date
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell3", for: indexPath) as! TeamsHorizintalTableViewCell
@@ -60,7 +69,7 @@ class LeguesDetailsTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 280
+        return 150
     }
 
     @IBAction func staract(_ sender: UIButton) {
@@ -81,7 +90,7 @@ extension LeguesDetailsTableViewController{
     
     func renderView(events: [EventDetails]?){
         guard let newItems = events else{return}
-        self.latestResults = newItems
+        LeguesDetailsTableViewController.latestResults = newItems
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }

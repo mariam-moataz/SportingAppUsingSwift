@@ -12,9 +12,9 @@ class UpCommingTableViewCell: UITableViewCell {
     @IBOutlet weak var upcomingColletion: UICollectionView!
     var delegateObj : DelegateProtocol!
     var viewModel : UpComingViewModel!
-    var events: [EventDetails]=[]
-    var endpoint : String?
-    var leagueID : Int?
+    static var upcommingEvents: [EventDetails]=[]
+    static var endpoint : String?
+    static var leagueID : Int?
     var index : Int?
 
     override func awakeFromNib() {
@@ -37,21 +37,21 @@ class UpCommingTableViewCell: UITableViewCell {
 extension UpCommingTableViewCell : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout
 {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return events.count
+        return UpCommingTableViewCell.upcommingEvents.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)as! HorizontalCollectionViewCell
-        cell.eventNameLabel.text = events[indexPath.row].league_name
-        cell.dateLabel.text = events[indexPath.row].event_date
-        cell.timeLabel.text = events[indexPath.row].event_time
-        leagueID = events[indexPath.row].league_key
+        cell.eventNameLabel.text = UpCommingTableViewCell.upcommingEvents[indexPath.row].league_name
+        cell.dateLabel.text = UpCommingTableViewCell.upcommingEvents[indexPath.row].event_date
+        cell.timeLabel.text = UpCommingTableViewCell.upcommingEvents[indexPath.row].event_time
+        UpCommingTableViewCell.leagueID = UpCommingTableViewCell.upcommingEvents[indexPath.row].league_key
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
         {
             //(UIScreen.main.bounds.size.width/2.0)
-           return CGSize(width:280, height: 280)
+           return CGSize(width:150, height: 150)
         }
     
 }
@@ -63,17 +63,13 @@ extension UpCommingTableViewCell{
     
     func renderView(events: [EventDetails]?){
         guard let newItems = events else{return}
-        self.events = newItems
+        UpCommingTableViewCell.upcommingEvents = newItems
         DispatchQueue.main.async {
             self.upcomingColletion.reloadData()
         }
     }
     func getURL()-> URL{
-        //endpoint = delegateObj.getEndpointId()
-        //leagueID = delegateObj.getLeagueId()
-        endpoint = "football"
-        leagueID = 205
-        let url = URL(string: URLServiceForEvent(endPoint: self.endpoint ?? "", fromDate: "2023-01-18",toDate: "2024-01-18",leagueID: String(leagueID.self ?? 0)).url)!
+        let url = URL(string: URLServiceForEvent(endPoint: UpCommingTableViewCell.endpoint ?? "", fromDate: "2023-01-18",toDate: "2024-01-18",leagueID: String(UpCommingTableViewCell.leagueID.self ?? 0)).url)!
         return url
     }
 }
