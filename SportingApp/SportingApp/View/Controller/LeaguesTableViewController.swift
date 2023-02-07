@@ -9,10 +9,11 @@ import UIKit
 import Kingfisher
 
 class LeaguesTableViewController: UITableViewController {
-
+    var leguesDetailsTableViewController : LeguesDetailsTableViewController!
     var leagues : [LeagueDetails]=[]
     var viewModel : LeagueViewModel!
     var endpoint : String!
+    var leagueID : Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,10 @@ class LeaguesTableViewController: UITableViewController {
         viewModel = LeagueViewModel()
         viewModel.getItems(url:getURL())
         viewModel.bindResultToTableViewController = { () in  self.renderView(legues: self.viewModel.vmResult)}
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        leagueID = 0
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -41,6 +46,8 @@ class LeaguesTableViewController: UITableViewController {
             cell.favoriteLeagueImage?.image = UIImage(named: "basketball")
         case "cricket":
             cell.favoriteLeagueImage?.image = UIImage(named: "cricket")
+        case "tennis":
+            cell.favoriteLeagueImage?.image = UIImage(named: "tennis")
         default:
             let url = URL(string: leagues[indexPath.row].league_logo ?? "")
             cell.favoriteLeagueImage?.kf.setImage(with: url,placeholder: UIImage(named: "football"))
@@ -49,20 +56,18 @@ class LeaguesTableViewController: UITableViewController {
     }
  
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        leagues[indexPath.row].league_key
-        let tableL = LeguesDetailsTableViewController()
-         tableL.endpoint = "football"
+        leagueID = leagues[indexPath.row].league_key
         performSegue(withIdentifier: "leagueSegue", sender: nil)
-     
-        
     }
-
     
-//    @IBSegueAction func seg(_ coder: NSCoder) -> UITableViewController? {
-//        performSegue(withIdentifier: "leagueSegue", sender: nil)
-//        return LeguesDetailsTableViewController(coder: coder, endpoint: "football")
-//    }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is LeguesDetailsTableViewController{
+            let vc = segue.destination as? LeguesDetailsTableViewController
+            vc!.leagueID = self.leagueID
+            vc!.endpoint = self.endpoint
+            
+        }
+    }
     
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -71,7 +76,17 @@ class LeaguesTableViewController: UITableViewController {
     
 }
     
-
+extension LeaguesTableViewController : DelegateProtocol{
+    func getLeagueId() -> (Int) {
+        return self.leagueID
+    }
+    
+    func getEndpointId() -> (String) {
+        return self.endpoint
+    }
+    
+    
+}
 extension LeaguesTableViewController{
     func nipFileConfig(){
         let nib = UINib(nibName: "TableViewCell", bundle: nil)
@@ -86,7 +101,7 @@ extension LeaguesTableViewController{
         }
     }
     func getURL()-> URL{
-        var url = URL(string: URLService(endPoint: self.endpoint).url)!
+        let url = URL(string: URLService(endPoint: self.endpoint).url)!
         return url
     }
 }

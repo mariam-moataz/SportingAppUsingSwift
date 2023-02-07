@@ -17,7 +17,6 @@ class APIHandler
                   handler: @escaping (Any?)->(Void))
     {
         let responsee = resonsee
-        //https://allsportsapi.com/admin/
         guard let newurl = url else{return}
         
         AF.request(newurl, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).response { response in
@@ -25,7 +24,6 @@ class APIHandler
             case .success(let data):
                 
                 switch responsee {
-                    
                 case is LeagueAPIResponse :
                     let jsonData : LeagueAPIResponse = convertFromJson(data: data!)
                     handler(jsonData)
