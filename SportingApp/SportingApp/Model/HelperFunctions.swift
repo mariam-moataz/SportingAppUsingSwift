@@ -11,6 +11,7 @@ func getSports() -> [Sport]{
     let football = Sport(name:"Football",image:"football",endPoint: "football")
     let basketball = Sport(name:"Basketball",image:"basketball",endPoint: "basketball")
     let cricket = Sport(name:"Cricket",image:"cricket",endPoint: "cricket")
+    let tennis = Sport(name:"tennis",image:"tennis",endPoint: "tennis")
     let baseball = Sport(name:"Baseball",image:"baseball",endPoint: nil)
     let americanFootball = Sport(name:"American football",image:"americanFootball",endPoint: nil)
     let volleyball = Sport(name:"Volleyball",image:"volleyball",endPoint: nil)
@@ -20,8 +21,9 @@ func getSports() -> [Sport]{
     var sports : [Sport] = []
     sports.append(football)
     sports.append(basketball)
-    sports.append(baseball)
+    sports.append(tennis)
     sports.append(cricket)
+    sports.append(baseball)
     sports.append(americanFootball)
     sports.append(volleyball)
     sports.append(golf)

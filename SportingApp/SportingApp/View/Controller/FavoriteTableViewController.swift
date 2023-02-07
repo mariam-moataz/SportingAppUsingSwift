@@ -43,6 +43,9 @@ class FavoriteTableViewController: UITableViewController {
         performSegue(withIdentifier: "favoriteSegue", sender: nil)
     }
     
+    
+    
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }

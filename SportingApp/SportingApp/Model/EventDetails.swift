@@ -28,4 +28,6 @@ class EventDetails : Decodable{
     var event_live : String?
     var event_stadium : String?
     var event_referee : String?
+    var event_home_team_logo : String?
+    var event_away_team_logo : String?
 }
