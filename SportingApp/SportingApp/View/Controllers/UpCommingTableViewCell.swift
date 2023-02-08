@@ -10,7 +10,7 @@ import UIKit
 class UpCommingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var upcomingColletion: UICollectionView!
-    var delegateObj : DelegateProtocol!
+    //var delegateObj : DelegateProtocol!
     var viewModel : LeagueDetailsViewModel!
     static var upcommingEvents: [EventDetails]=[]
     static var endpoint : String?

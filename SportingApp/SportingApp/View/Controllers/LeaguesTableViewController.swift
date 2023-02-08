@@ -78,7 +78,7 @@ class LeaguesTableViewController: UITableViewController {
     
 }
     
-extension LeaguesTableViewController : DelegateProtocol{
+/*extension LeaguesTableViewController : DelegateProtocol{
     func getLeagueId() -> (Int) {
         return self.leagueID
     }
@@ -88,7 +88,7 @@ extension LeaguesTableViewController : DelegateProtocol{
     }
     
     
-}
+}*/
 extension LeaguesTableViewController{
     func nipFileConfig(){
         let nib = UINib(nibName: "TableViewCell", bundle: nil)

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol DelegateProtocol{
+/*protocol DelegateProtocol{
     func getLeagueId() -> (Int)
     func getEndpointId() -> (String)
-}
+}*/
