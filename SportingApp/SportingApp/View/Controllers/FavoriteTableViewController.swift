@@ -14,11 +14,15 @@ class FavoriteTableViewController: UITableViewController {
 //        return LeguesDetailsTableViewController(coder: coder)
 //    }
     
-    let arr = ["1","2","3"]
-    
+    var viewModel : FetchFromCoreViewModel!
+    var leagues : [NSManagedObject]!
     override func viewDidLoad() {
         super.viewDidLoad()
         nipFileConfig()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        viewModel = FetchFromCoreViewModel()
+        leagues = viewModel.fetchCoreData(appDelegate : appDelegate)
+        
     }
 
     // MARK: - Table view data source

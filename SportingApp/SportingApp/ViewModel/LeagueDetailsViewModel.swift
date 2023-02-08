@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 class LeagueDetailsViewModel {
     var bindResultToTableViewController : (()->()) = {}
     var vmResult : [EventDetails]?{
