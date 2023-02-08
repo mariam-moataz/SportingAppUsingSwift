@@ -15,7 +15,7 @@ class LeagueDetailsViewModel {
     }
     
     //get data from model
-    func getItems(url:URL){
+    func getItems(url:URL) {
         let response = EventAPIResponse()
         APIHandler.sharedInstance.fetchApi(url:url , resonsee: response){ result in
             guard let result = result as? EventAPIResponse else{

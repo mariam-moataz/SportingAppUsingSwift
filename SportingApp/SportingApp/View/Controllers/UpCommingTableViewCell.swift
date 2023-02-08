@@ -11,7 +11,7 @@ class UpCommingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var upcomingColletion: UICollectionView!
     var delegateObj : DelegateProtocol!
-    var viewModel : UpComingViewModel!
+    var viewModel : LeagueDetailsViewModel!
     static var upcommingEvents: [EventDetails]=[]
     static var endpoint : String?
     static var leagueID : Int?
@@ -22,7 +22,7 @@ class UpCommingTableViewCell: UITableViewCell {
         upcomingColletion.delegate = self
         upcomingColletion.dataSource = self
         nipFileConfig()
-        viewModel = UpComingViewModel()
+        viewModel = LeagueDetailsViewModel()
         viewModel.getItems(url:getURL())
         viewModel.bindResultToTableViewController = { () in  self.renderView(events: self.viewModel.vmResult)}
     }
@@ -66,6 +66,7 @@ extension UpCommingTableViewCell{
         UpCommingTableViewCell.upcommingEvents = newItems
         DispatchQueue.main.async {
             self.upcomingColletion.reloadData()
+            
         }
     }
     func getURL()-> URL{
