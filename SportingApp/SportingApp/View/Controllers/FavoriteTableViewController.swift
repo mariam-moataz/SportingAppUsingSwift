@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class FavoriteTableViewController: UITableViewController {
 
@@ -14,13 +15,19 @@ class FavoriteTableViewController: UITableViewController {
 //        return LeguesDetailsTableViewController(coder: coder)
 //    }
     
-    let arr = ["1","2","3"]
-    
+    var viewModel : FetchFromCoreViewModel!
+    var leagues : [NSManagedObject]!
     override func viewDidLoad() {
         super.viewDidLoad()
         nipFileConfig()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        viewModel = FetchFromCoreViewModel()
+        leagues = viewModel.fetchCoreData(appDelegate : appDelegate)
+        tableView.reloadData()
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -28,14 +35,15 @@ class FavoriteTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arr.count
+        return leagues.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
-        cell.favoriteLeagueName?.text = arr[indexPath.row]
-        cell.favoriteLeagueImage?.image = UIImage(named: "load")
+        cell.favoriteLeagueName?.text = leagues[indexPath.row].value(forKey: "league_name") as? String
+        let url = URL(string: leagues[indexPath.row].value(forKey: "league_logo") as? String ?? "")
+        cell.favoriteLeagueImage?.kf.setImage(with: url,placeholder: UIImage(named: "football"))
         return cell
     }
     

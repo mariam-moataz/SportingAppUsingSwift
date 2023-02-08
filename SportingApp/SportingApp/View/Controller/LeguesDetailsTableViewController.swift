@@ -26,7 +26,7 @@ class LeguesDetailsTableViewController: UITableViewController {
         let LatestResultsOperation = BlockOperation {
             self.latestResultViewModel.getItems(url:self.getURL())//<<<<<Latest Results
             self.latestResultViewModel.bindResultToTableViewController = { () in  self.renderView(events: self.latestResultViewModel.vmResult)}
-            operationQueue
+          //  operationQueue
         }
     }
 
