@@ -18,8 +18,8 @@ class HorizontalCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var eventNameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
   
     }
-
+    
 }
