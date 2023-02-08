@@ -9,14 +9,16 @@ import UIKit
 
 class LeguesDetailsTableViewController: UITableViewController {
     
-    @IBOutlet weak var staroutlet: UIButton!
-    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var upcommingAndLatestResultsViewModel : LeagueDetailsViewModel!
     var latestResultViewModel : LeagueDetailsViewModel!
+    var league : LeagueDetails!
     var endpoint : String?
     var leagueID : Int?
     var latestResults: [EventDetails]=[] //latest results
     var upCommingEvents: [EventDetails]=[] //Upcomming
+    
+    @IBOutlet weak var staroutlet: UIButton!
     
     override func viewDidLoad() {
         let queue = OperationQueue()
@@ -106,7 +108,8 @@ class LeguesDetailsTableViewController: UITableViewController {
     
     @IBAction func staract(_ sender: UIButton) {
         staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
-        
+        let saveToCoreViewModel = SavetoCoreViewModel()
+        saveToCoreViewModel.saveItems(league : league, appDelegate : appDelegate)
     }
 }
     extension LeguesDetailsTableViewController{

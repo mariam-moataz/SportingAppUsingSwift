@@ -10,11 +10,12 @@ import Kingfisher
 
 class LeaguesTableViewController: UITableViewController {
     var leguesDetailsTableViewController : LeguesDetailsTableViewController!
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var leagues : [LeagueDetails]=[]
     var viewModel : LeagueViewModel!
     var endpoint : String!
     var leagueID : Int!
-    
+    var index : Int!
     override func viewDidLoad() {
         super.viewDidLoad()
         nipFileConfig()
@@ -57,6 +58,7 @@ class LeaguesTableViewController: UITableViewController {
  
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         leagueID = leagues[indexPath.row].league_key
+        index = indexPath.row
         performSegue(withIdentifier: "leagueSegue", sender: nil)
     }
     
@@ -65,7 +67,7 @@ class LeaguesTableViewController: UITableViewController {
             let vc = segue.destination as? LeguesDetailsTableViewController
             vc!.leagueID = self.leagueID
             vc!.endpoint = self.endpoint
-            
+            vc!.league = leagues[index]
         }
     }
     
