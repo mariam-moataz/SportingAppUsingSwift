@@ -277,9 +277,7 @@
 				C9961E98298DB9D500AAE7E8 /* LeagueDetails.swift */,
 				C9961E9A298DBBE200AAE7E8 /* EventDetails.swift */,
 				C9961E92298DB6E300AAE7E8 /* TeamDetails.swift */,
-				C94652BB2991770B002DB51D /* DelegateProtocol.swift */,
 				C90981BF298C1B2100471C23 /* Services */,
-				C9961EA9298DEE1C00AAE7E8 /* RenderProtocol.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -323,6 +321,36 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		C9FFD5B52993A511004E3B7F /* CoreDataServices */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFD5B62993A544004E3B7F /* SaveToCoreService.swift */,
+				C9FFD5C32993B3BE004E3B7F /* FetchFromCoreService.swift */,
+			);
+			path = CoreDataServices;
+			sourceTree = "<group>";
+		};
+		C9FFD5C02993A819004E3B7F /* APIResponses */ = {
+			isa = PBXGroup;
+			children = (
+				C9899C6A298D53FF00C6C74C /* APIResponse.swift */,
+				C9FFD5BE2993A7F7004E3B7F /* EventAPIResponse.swift */,
+				C9FFD5BA2993A79A004E3B7F /* LeagueAPIResponse.swift */,
+				C9FFD5BC2993A7DF004E3B7F /* TeamAPIResponse.swift */,
+			);
+			path = APIResponses;
+			sourceTree = "<group>";
+		};
+		C9FFD5C52993BFDD004E3B7F /* Contract */ = {
+			isa = PBXGroup;
+			children = (
+				C9961EA9298DEE1C00AAE7E8 /* RenderProtocol.swift */,
+				C94652BB2991770B002DB51D /* DelegateProtocol.swift */,
+			);
+			path = Contract;
+			sourceTree = "<group>";
+		};
+
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
