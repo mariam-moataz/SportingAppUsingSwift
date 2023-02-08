@@ -13,7 +13,7 @@ class UpComingViewModel {
             bindResultToTableViewController() //render
         }
     }
-    
+    //asndlskandsaldn
     //get data from model
     func getItems(url:URL){
         let response = EventAPIResponse()
