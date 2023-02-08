@@ -295,9 +295,7 @@
 				C9961E98298DB9D500AAE7E8 /* LeagueDetails.swift */,
 				C9961E9A298DBBE200AAE7E8 /* EventDetails.swift */,
 				C9961E92298DB6E300AAE7E8 /* TeamDetails.swift */,
-				C94652BB2991770B002DB51D /* DelegateProtocol.swift */,
 				C90981BF298C1B2100471C23 /* Services */,
-				C9961EA9298DEE1C00AAE7E8 /* RenderProtocol.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -364,6 +362,8 @@
 		C9FFD5C52993BFDD004E3B7F /* Contract */ = {
 			isa = PBXGroup;
 			children = (
+				C9961EA9298DEE1C00AAE7E8 /* RenderProtocol.swift */,
+				C94652BB2991770B002DB51D /* DelegateProtocol.swift */,
 			);
 			path = Contract;
 			sourceTree = "<group>";
