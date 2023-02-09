@@ -13,6 +13,7 @@ class LeaguesTableViewController: UITableViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var leagues : [LeagueDetails]=[]
     var viewModel : LeagueViewModel!
+    
     //var endpoint : String!
     var leagueID : Int!
     var index : Int!
@@ -50,10 +51,10 @@ class LeaguesTableViewController: UITableViewController {
             cell.favoriteLeagueImage.image = UIImage(named: SportsCollectionViewController.endpoint)
         }
         cell.backgroundColor = UIColor.white
-                cell.layer.borderColor = UIColor.black.cgColor
-                cell.layer.borderWidth = 6
-                cell.layer.cornerRadius = 15
-                cell.clipsToBounds = true
+        cell.layer.borderColor = UIColor.black.cgColor
+        cell.layer.borderWidth = 6
+        cell.layer.cornerRadius = 15
+        cell.clipsToBounds = true
         /*switch endpoint{
         case "basketball":
             cell.favoriteLeagueImage?.image = UIImage(named: "basketball")

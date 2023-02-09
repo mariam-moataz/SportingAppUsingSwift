@@ -6,28 +6,29 @@
 //
 
 import UIKit
-import CoreData
 import Kingfisher
 import Reachability
 
 class FavoriteTableViewController: UITableViewController {
     
+    @IBOutlet weak var searchbar: UISearchBar!
+    
     var viewModel : FetchFromCoreViewModel!
     var leaguesViewModel : LeagueViewModel!
     var network : Reachability!
-    var leagues : [NSManagedObject]!
+    var leagues : [LeagueDetails]?
     var leagueID : Int!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nipFileConfig()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         viewModel = FetchFromCoreViewModel()
-        leagues = viewModel.fetchCoreData(appDelegate : appDelegate)
+        leagues = viewModel.callManagerToFetch(appDelegate: appDelegate)
         tableView.reloadData()
     }
     // MARK: - Table view data source
@@ -37,14 +38,19 @@ class FavoriteTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return leagues.count
+        return leagues?.count ?? 0
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
-        cell.favoriteLeagueName?.text = leagues[indexPath.row].value(forKey: "league_name") as? String
+        cell.favoriteLeagueName?.text = leagues?[indexPath.row].league_name
         cell.favoriteLeagueImage?.image = UIImage(named: "sports")
+        cell.backgroundColor = UIColor.white
+        cell.layer.borderColor = UIColor.black.cgColor
+        cell.layer.borderWidth = 6
+        cell.layer.cornerRadius = 15
+        cell.clipsToBounds = true
         return cell
     }
     
@@ -52,7 +58,7 @@ class FavoriteTableViewController: UITableViewController {
         
         network = Reachability.forInternetConnection()
         if network.isReachable(){
-            leagueID = leagues[indexPath.row].value(forKey: "league_key") as? Int
+            leagueID = leagues?[indexPath.row].league_key
             performSegue(withIdentifier: "favoriteSegue", sender: nil)
         }
         else{

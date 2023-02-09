@@ -6,13 +6,10 @@
 //
 
 import Foundation
-import CoreData
 
-class SavetoCoreViewModel {
-    
-    var vmResult : NSManagedObject!
-    func saveItems(league : LeagueDetails, appDelegate : AppDelegate){
-        vmResult = saveToCore(favoriteLeague: league, appDelegate: appDelegate)
+class SavetoCoreViewModel{
+    func callManagerToSave(league: LeagueDetails, appDelegate: AppDelegate){
+        let saveManager = CoreDataManager()
+        saveManager.saveItems(league: league, appDelegate: appDelegate)
     }
-
 }

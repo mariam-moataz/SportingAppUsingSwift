@@ -109,7 +109,8 @@ class LeguesDetailsTableViewController: UITableViewController {
     @IBAction func staract(_ sender: UIButton) {
         staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
         let saveToCoreViewModel = SavetoCoreViewModel()
-        saveToCoreViewModel.saveItems(league : league, appDelegate : appDelegate)
+        //saveToCoreViewModel.saveItems(league : league, appDelegate : appDelegate)
+        saveToCoreViewModel.callManagerToSave(league : league, appDelegate : appDelegate)
     }
 }
     extension LeguesDetailsTableViewController{
