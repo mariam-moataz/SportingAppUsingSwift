@@ -11,7 +11,9 @@ import Alamofire
 class SportsCollectionViewController: UICollectionViewController {
     
     var sports = getSports()
-    
+    //
+    static var endpoint : String!
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -33,13 +35,23 @@ class SportsCollectionViewController: UICollectionViewController {
         cell!.imageVIew.image = UIImage(named: sports[indexPath.row].image!)
         cell!.sportLabel.text = sports[indexPath.row].name
 
+        
+        //
+        /*cell!.imageVIew.layer.borderWidth = 1
+        cell!.imageVIew.layer.masksToBounds = false
+        cell!.imageVIew.layer.borderColor = UIColor.black.cgColor
+        cell!.imageVIew.layer.cornerRadius = cell!.imageVIew.frame.height/2
+        cell!.imageVIew.clipsToBounds = true*/
+        //
+        
         return cell!
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let leaguesTableViewController : LeaguesTableViewController = self.storyboard?.instantiateViewController(withIdentifier: "leaguesTVC") as! LeaguesTableViewController
         
-        leaguesTableViewController.endpoint = getSportEndPoint(endpoint: sports[indexPath.row].endPoint ?? "")
+        //leaguesTableViewController.endpoint = getSportEndPoint(endpoint: sports[indexPath.row].endPoint ?? "")
+        SportsCollectionViewController.endpoint = getSportEndPoint(endpoint: sports[indexPath.row].endPoint ?? " ")
         self.navigationController?.pushViewController(leaguesTableViewController, animated: true)
     }
     
@@ -53,6 +65,9 @@ extension SportsCollectionViewController : UICollectionViewDelegateFlowLayout{
         return CGSize(width: w, height: h)
         }
     
+    static func getEndPoint() -> String{
+        return SportsCollectionViewController.endpoint
+    }
 }
 
 func getSportEndPoint(endpoint: String) -> (String){

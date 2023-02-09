@@ -7,8 +7,8 @@ target 'SportingApp' do
   use_frameworks!
   pod 'Kingfisher', '~> 7.0'
   pod 'Alamofire'
-
   pod 'Reachability', '~> 3.2'
+
   # Pods for SportingApp
 
   target 'SportingAppTests' do

@@ -13,7 +13,7 @@ class LeguesDetailsTableViewController: UITableViewController {
     var upcommingAndLatestResultsViewModel : LeagueDetailsViewModel!
     var latestResultViewModel : LeagueDetailsViewModel!
     var league : LeagueDetails!
-    var endpoint : String?
+    //var endpoint : String?
     var leagueID : Int?
     var latestResults: [EventDetails]=[] //latest results
     var upCommingEvents: [EventDetails]=[] //Upcomming
@@ -81,7 +81,7 @@ class LeguesDetailsTableViewController: UITableViewController {
     }
     
     func upcomming(indexPath : IndexPath) -> UITableViewCell{
-        UpCommingTableViewCell.endpoint = endpoint
+        //UpCommingTableViewCell.endpoint = endpoint
         UpCommingTableViewCell.leagueID = leagueID
         var cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! UpCommingTableViewCell
         return cell
@@ -143,11 +143,11 @@ class LeguesDetailsTableViewController: UITableViewController {
         }
         
         func getURLforLatest()-> URL{
-            let url = URL(string: URLServiceForEvent(endPoint: self.endpoint ?? "", fromDate: "2022-01-18",toDate: "2023-01-18",leagueID: String(leagueID.self ?? 0)).url)!
+            let url = URL(string: URLServiceForEvent(endPoint: SportsCollectionViewController.endpoint ?? "", fromDate: "2022-01-18",toDate: "2023-01-18",leagueID: String(leagueID.self ?? 0)).url)!
             return url
         }
         func getURLForUpcomming()-> URL{
-            let url = URL(string: URLServiceForEvent(endPoint: self.endpoint ?? "", fromDate: "2023-01-18",toDate: "2024-01-18",leagueID: String(self.leagueID.self ?? 0)).url)!
+            let url = URL(string: URLServiceForEvent(endPoint: SportsCollectionViewController.endpoint ?? "", fromDate: "2023-01-18",toDate: "2024-01-18",leagueID: String(self.leagueID.self ?? 0)).url)!
             return url
         }
     }
