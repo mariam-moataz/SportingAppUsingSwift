@@ -1,16 +1,18 @@
 //
-//  VerticalTableViewCell.swift
+//  LatestVerCollectionViewCell.swift
 //  SportingApp
 //
-//  Created by Eman on 01/02/2023.
+//  Created by Eman on 09/02/2023.
 //
 
 import UIKit
 
-class VerticalTableViewCell: UITableViewCell {
-
+class LatestVerCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var secondTeamName: UILabel!
+    
     @IBOutlet weak var teamNAmeLabel: UILabel!
     
+    @IBOutlet weak var VS: UILabel!
     
     @IBOutlet weak var scoreLabel: UILabel!
     
@@ -18,15 +20,9 @@ class VerticalTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var TimeLabel: UILabel!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
+        // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }

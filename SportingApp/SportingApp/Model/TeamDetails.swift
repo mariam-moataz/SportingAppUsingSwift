@@ -13,6 +13,6 @@ class TeamDetails : Decodable{
     var team_name : String?
     var team_logo : String?
     var players : [PlayerDetails]?
-    var choachs : [CoachDetails]
+    var choachs : [CoachDetails]?
 }
 //https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=96&APIkey=!_your_account_APIkey_!

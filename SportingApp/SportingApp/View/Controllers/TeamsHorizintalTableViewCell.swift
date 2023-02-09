@@ -12,7 +12,9 @@ class TeamsHorizintalTableViewCell: UITableViewCell {
     var table = LeguesDetailsTableViewController()
     var upCommingViewCell = UpCommingTableViewCell()
     static var teamsArr: [EventDetails] = [] //eventsDetails
-
+    var teamkey : Int?
+  var  ref : delegateforCell?
+    var teamID : Int?
    @IBOutlet  weak var teamsCollection: UICollectionView!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,15 +42,18 @@ extension TeamsHorizintalTableViewCell : UICollectionViewDelegate , UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TeamsCollectionViewCell
         let url = URL(string: TeamsHorizintalTableViewCell.teamsArr[indexPath.row].event_home_team_logo ?? "")
+     teamkey  =  TeamsHorizintalTableViewCell.teamsArr[indexPath.row].home_team_key
         cell.teamImg.kf.setImage(with: url,placeholder: UIImage(named: "load"))
-//        cell.teamImg.layer.cornerRadius = cell.teamImg.frame.width/2
-//        cell.teamImg.clipsToBounds = true
+         teamID = TeamsHorizintalTableViewCell.teamsArr[indexPath.row].home_team_key
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
         {
             //(UIScreen.main.bounds.size.width/2.0)
-           return CGSize(width:150, height: 150)
+           return CGSize(width:200, height: 200)
         }
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        TeamDetailsViewController.teamId = self.teamID
+        ref?.navigate()
+    }
 }

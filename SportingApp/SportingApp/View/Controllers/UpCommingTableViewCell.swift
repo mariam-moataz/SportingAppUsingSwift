@@ -38,10 +38,13 @@ extension UpCommingTableViewCell : UICollectionViewDelegate , UICollectionViewDa
 {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return UpCommingTableViewCell.upcommingEvents.count
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)as! HorizontalCollectionViewCell
+        
+        
         cell.eventNameLabel.text = UpCommingTableViewCell.upcommingEvents[indexPath.row].league_name
         cell.dateLabel.text = UpCommingTableViewCell.upcommingEvents[indexPath.row].event_date
         cell.timeLabel.text = UpCommingTableViewCell.upcommingEvents[indexPath.row].event_time
@@ -51,7 +54,7 @@ extension UpCommingTableViewCell : UICollectionViewDelegate , UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
         {
             //(UIScreen.main.bounds.size.width/2.0)
-           return CGSize(width:150, height: 150)
+           return CGSize(width:200, height: 200)
         }
     
 }
