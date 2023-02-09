@@ -11,7 +11,7 @@ class LeguesDetailsTableViewController: UITableViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var upcommingAndLatestResultsViewModel : LeagueDetailsViewModel!
-    var latestResultViewModel : LeagueDetailsViewModel!
+   var latestResultViewModel : LeagueDetailsViewModel!
     var league : LeagueDetails!
     var endpoint : String?
     var leagueID : Int?
@@ -59,12 +59,12 @@ class LeguesDetailsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch (section){
-        case 1: //latest results
-            return latestResults.count
-        default://upcomming events & teams
+      //  switch (section){
+//        case 1: //latest results
+//            return latestResults.count
+//        default://upcomming events & teams
             return 1
-        }
+     //   }
     }
     
     
@@ -84,26 +84,39 @@ class LeguesDetailsTableViewController: UITableViewController {
         UpCommingTableViewCell.endpoint = endpoint
         UpCommingTableViewCell.leagueID = leagueID
         var cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! UpCommingTableViewCell
+        cell.backgroundColor = UIColor.white
+        cell.layer.borderColor = UIColor.black.cgColor
+        cell.layer.borderWidth = 6
+        cell.layer.cornerRadius = 15
+        cell.clipsToBounds = true
         return cell
     }
     func latest(indexPath : IndexPath) -> UITableViewCell{
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! VerticalTableViewCell
-        cell.TimeLabel.text  = latestResults[indexPath.row].event_time
-        cell.scoreLabel.text = latestResults[indexPath.row].event_final_result
-        cell.teamNAmeLabel.text = latestResults[indexPath.row].event_home_team ?? "" + "VS" +  (latestResults[indexPath.row].event_away_team ?? "")
-        cell.datelabel.text = latestResults[indexPath.row].event_date
+        LatestResultTableViewCell.endpoint = endpoint
+        LatestResultTableViewCell.leagueID = leagueID
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellfortable", for: indexPath) as! LatestResultTableViewCell
+        cell.backgroundColor = UIColor.white
+        cell.layer.borderColor = UIColor.black.cgColor
+        cell.layer.borderWidth = 6
+        cell.layer.cornerRadius = 15
+        cell.clipsToBounds = true
         return cell
     }
     func teams(indexPath : IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell3", for: indexPath) as! TeamsHorizintalTableViewCell
+        cell.backgroundColor = UIColor.white
+        cell.layer.borderColor = UIColor.black.cgColor
+        cell.layer.borderWidth = 6
+        cell.layer.cornerRadius = 15
+        cell.clipsToBounds = true
         cell.teamsCollection.reloadData()
-
+        cell.ref = self
         return cell
     }
     
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 200
     }
     
     @IBAction func staract(_ sender: UIButton) {
@@ -116,8 +129,8 @@ class LeguesDetailsTableViewController: UITableViewController {
         func nipFileConfig(){
             let nib = UINib(nibName: "UpCommingTableViewCell", bundle: nil)
             tableView.register(nib, forCellReuseIdentifier: "cell1")
-            let nib2 = UINib(nibName: "VerticalTableViewCell", bundle: nil) //latest results
-            tableView.register(nib2, forCellReuseIdentifier: "cell2")
+            let nib2 = UINib(nibName: "LatestResultTableViewCell", bundle: nil) //latest results
+            tableView.register(nib2, forCellReuseIdentifier: "cellfortable")
             let nib3 = UINib(nibName: "TeamsHorizintalTableViewCell", bundle: nil)
             tableView.register(nib3, forCellReuseIdentifier: "cell3")
         }
@@ -152,3 +165,12 @@ class LeguesDetailsTableViewController: UITableViewController {
         }
     }
 
+extension LeguesDetailsTableViewController : delegateforCell{
+    func navigate(){
+        var TeamDetailsVC  =    self.storyboard?.instantiateViewController(withIdentifier: "teamsViewController") as!TeamDetailsViewController
+       
+       // self.navigationController?.pushViewController(TeamDetailsVC, animated: true)
+        self.present(TeamDetailsVC, animated: true, completion: nil)
+    }
+    
+}
