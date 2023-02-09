@@ -2,23 +2,31 @@ PODS:
   - Alamofire (5.6.4)
   - Kingfisher (7.5.0)
   - Reachability (3.2)
+  - SnackBar.swift (0.1.0):
+    - SnapKit
+  - SnapKit (5.6.0)
 
 DEPENDENCIES:
   - Alamofire
   - Kingfisher (~> 7.0)
   - Reachability (~> 3.2)
+  - SnackBar.swift (~> 0.1)
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - Kingfisher
     - Reachability
+    - SnackBar.swift
+    - SnapKit
 
 SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   Kingfisher: b9c2a4a4af2990a768445c277359b27bde287d71
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SnackBar.swift: 79ea4df13ea9e6633137dd6acbd490534d26440d
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: f670da58bf918ac580c36de0b27b57c3543904da
+PODFILE CHECKSUM: e6daf508e97c3be929324a8c212d3b065db2fea2
 
 COCOAPODS: 1.11.3

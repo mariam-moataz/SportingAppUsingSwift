@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import SnackBar_swift
 
 class SportsCollectionViewController: UICollectionViewController {
     
@@ -48,11 +49,17 @@ class SportsCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let leaguesTableViewController : LeaguesTableViewController = self.storyboard?.instantiateViewController(withIdentifier: "leaguesTVC") as! LeaguesTableViewController
         
         //leaguesTableViewController.endpoint = getSportEndPoint(endpoint: sports[indexPath.row].endPoint ?? "")
-        SportsCollectionViewController.endpoint = getSportEndPoint(endpoint: sports[indexPath.row].endPoint ?? " ")
-        self.navigationController?.pushViewController(leaguesTableViewController, animated: true)
+        if indexPath.row >= 4{
+            SnackBar.make(in: self.view, message: "This sport will be add to application soon", duration: .lengthLong).setAction(with: "Close", action: nil).show()
+        }
+        else{
+            SportsCollectionViewController.endpoint = getSportEndPoint(endpoint: sports[indexPath.row].endPoint ?? " ")
+            self.navigationController?.pushViewController(leaguesTableViewController, animated: true)
+        }
     }
     
 }
