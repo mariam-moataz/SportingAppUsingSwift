@@ -13,10 +13,9 @@ class LeaguesTableViewController: UITableViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var leagues : [LeagueDetails]=[]
     var viewModel : LeagueViewModel!
-    
-    //var endpoint : String!
-    var leagueID : Int!
+    static var leagueID : Int!
     var index : Int!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         nipFileConfig()
@@ -24,8 +23,9 @@ class LeaguesTableViewController: UITableViewController {
         viewModel.getItems(url:getURL())
         viewModel.bindResultToTableViewController = { () in  self.renderView(legues: self.viewModel.vmResult)}
     }
+    
     override func viewWillAppear(_ animated: Bool) {
-        leagueID = 0
+        //leagueID = 0
         tableView.reloadData()
     }
 
@@ -50,11 +50,7 @@ class LeaguesTableViewController: UITableViewController {
         else{
             cell.favoriteLeagueImage.image = UIImage(named: SportsCollectionViewController.endpoint)
         }
-        cell.backgroundColor = UIColor.white
-        cell.layer.borderColor = UIColor.black.cgColor
-        cell.layer.borderWidth = 6
-        cell.layer.cornerRadius = 15
-        cell.clipsToBounds = true
+        cell.cellframe()
         /*switch endpoint{
         case "basketball":
             cell.favoriteLeagueImage?.image = UIImage(named: "basketball")
@@ -70,7 +66,7 @@ class LeaguesTableViewController: UITableViewController {
     }
  
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        leagueID = leagues[indexPath.row].league_key
+        LeaguesTableViewController.leagueID = leagues[indexPath.row].league_key
         index = indexPath.row
         performSegue(withIdentifier: "leagueSegue", sender: nil)
     }
@@ -78,7 +74,7 @@ class LeaguesTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is LeguesDetailsTableViewController{
             let vc = segue.destination as? LeguesDetailsTableViewController
-            vc!.leagueID = self.leagueID
+            //LeguesDetailsTableViewController.leagueID = self.leagueID
             //vc!.endpoint = self.endpoint
             vc!.league = leagues[index]
         }
@@ -90,18 +86,7 @@ class LeaguesTableViewController: UITableViewController {
     }
     
 }
-    
-/*extension LeaguesTableViewController : DelegateProtocol{
-    func getLeagueId() -> (Int) {
-        return self.leagueID
-    }
-    
-    func getEndpointId() -> (String) {
-        return self.endpoint
-    }
-    
-    
-}*/
+
 extension LeaguesTableViewController{
     func nipFileConfig(){
         let nib = UINib(nibName: "TableViewCell", bundle: nil)
@@ -119,5 +104,10 @@ extension LeaguesTableViewController{
         let url = URL(string: URLService(endPoint: SportsCollectionViewController.endpoint).url)!
         return url
     }
+    
+    static func getLeagueId() -> Int{
+        return LeaguesTableViewController.leagueID
+    }
+    
 }
 

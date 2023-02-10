@@ -11,13 +11,12 @@ class LatestResultTableViewCell: UITableViewCell {
 
     @IBOutlet weak var latestResultCollection: UICollectionView!
     var viewModel : LeagueDetailsViewModel!
-   static var latestResults: [EventDetails]=[] //latest results
-    static var endpoint : String?
+    static var latestResults: [EventDetails]=[] //latest results
     static var leagueID : Int?
     var index : Int?
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
         latestResultCollection.delegate = self
         latestResultCollection.dataSource = self
         nipFileConfig()
@@ -30,7 +29,6 @@ class LatestResultTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
 }
@@ -48,11 +46,6 @@ extension LatestResultTableViewCell : UICollectionViewDelegate , UICollectionVie
         cell.teamNAmeLabel.text = LatestResultTableViewCell.latestResults[indexPath.row].event_home_team ?? ""
         cell.secondTeamName.text =  LatestResultTableViewCell.latestResults[indexPath.row].event_away_team ?? ""
         cell.datelabel.text = LatestResultTableViewCell.latestResults[indexPath.row].event_date
-        cell.backgroundColor = UIColor.white
-        cell.layer.borderColor = UIColor.black.cgColor
-        cell.layer.borderWidth = 6
-        cell.layer.cornerRadius = 15
-        cell.clipsToBounds = true
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
@@ -71,13 +64,19 @@ extension LatestResultTableViewCell{
     func renderView(events: [EventDetails]?){
         guard let newItems = events else{return}
         LatestResultTableViewCell.latestResults = newItems
+        TeamsHorizintalTableViewCell.teamsArr += LatestResultTableViewCell.latestResults
         DispatchQueue.main.async {
             self.latestResultCollection.reloadData()
-            
         }
     }
+    
     func getURL()-> URL{
-        let url = URL(string: URLServiceForEvent(endPoint: UpCommingTableViewCell.endpoint ?? "", fromDate: "2022-01-18",toDate: "2023-01-18",leagueID: String(UpCommingTableViewCell.leagueID.self ?? 0)).url)!
+        let toDate = DateConverter2().dateFormater(date: Date()) //current
+        var dateComponent = DateComponents()
+        dateComponent.day = -730 //2years
+        let passedDate = Calendar.current.date(byAdding: dateComponent, to: Date())
+        let fromDate = DateConverter2().dateFormater(date: passedDate!) //passed
+        let url = URL(string: URLServiceForEvent(endPoint: SportsCollectionViewController.getEndPoint() , fromDate: "\(fromDate)" ,toDate: "\(toDate)",leagueID: LeaguesTableViewController.getLeagueId() ).url)!//<<<<<<<<<<<
         return url
     }
 }

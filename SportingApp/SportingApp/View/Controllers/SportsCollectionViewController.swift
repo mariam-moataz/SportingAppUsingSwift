@@ -12,9 +12,7 @@ import SnackBar_swift
 class SportsCollectionViewController: UICollectionViewController {
     
     var sports = getSports()
-    //
     static var endpoint : String!
-    //
     override func viewDidLoad() {
         super.viewDidLoad()
     }

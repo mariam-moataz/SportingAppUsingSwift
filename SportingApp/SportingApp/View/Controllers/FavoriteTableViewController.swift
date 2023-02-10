@@ -73,7 +73,7 @@ class FavoriteTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is LeguesDetailsTableViewController{
             let vc = segue.destination as? LeguesDetailsTableViewController
-            vc!.leagueID = leagueID
+            //vc!.leagueID = leagueID
         }
     }
     

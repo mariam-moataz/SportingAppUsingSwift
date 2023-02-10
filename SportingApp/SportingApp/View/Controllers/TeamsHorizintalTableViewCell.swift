@@ -9,19 +9,22 @@ import UIKit
 import Kingfisher
 
 class TeamsHorizintalTableViewCell: UITableViewCell {
+    
+   @IBOutlet  weak var teamsCollection: UICollectionView!
+    
     var table = LeguesDetailsTableViewController()
     var upCommingViewCell = UpCommingTableViewCell()
-    static var teamsArr: [EventDetails] = [] //eventsDetails
+    static var teamsArr: [EventDetails] = [] //team
     var teamkey : Int?
-  var  ref : delegateforCell?
     var teamID : Int?
-   @IBOutlet  weak var teamsCollection: UICollectionView!
+    var ref : DelegateForCell?
+    
     override func awakeFromNib() {
-        super.awakeFromNib()
         
+        super.awakeFromNib()
         teamsCollection.delegate = self
         teamsCollection.dataSource = self
-      let nib = UINib(nibName: "TeamsCollectionViewCell", bundle: nil)
+        let nib = UINib(nibName: "TeamsCollectionViewCell", bundle: nil)
         teamsCollection.register(nib, forCellWithReuseIdentifier: "cell")
         //teamsArr = LeguesDetailsTableViewController.latestResults + UpCommingTableViewCell.upcommingEvents
     }
@@ -29,7 +32,6 @@ class TeamsHorizintalTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
    
 }
@@ -41,10 +43,11 @@ extension TeamsHorizintalTableViewCell : UICollectionViewDelegate , UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TeamsCollectionViewCell
-        let url = URL(string: TeamsHorizintalTableViewCell.teamsArr[indexPath.row].event_home_team_logo ?? "")
-     teamkey  =  TeamsHorizintalTableViewCell.teamsArr[indexPath.row].home_team_key
-        cell.teamImg.kf.setImage(with: url,placeholder: UIImage(named: "load"))
-         teamID = TeamsHorizintalTableViewCell.teamsArr[indexPath.row].home_team_key
+        let url = URL(string: TeamsHorizintalTableViewCell.teamsArr[indexPath.row].event_away_team_logo ?? "")
+        cell.teamImg.kf.setImage(with: url,placeholder: UIImage(named: "sports"))
+        
+        teamID = TeamsHorizintalTableViewCell.teamsArr[indexPath.row].home_team_key
+        teamkey = TeamsHorizintalTableViewCell.teamsArr[indexPath.row].home_team_key
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
