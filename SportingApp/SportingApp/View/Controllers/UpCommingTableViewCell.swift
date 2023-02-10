@@ -13,7 +13,7 @@ class UpCommingTableViewCell: UITableViewCell {
     //var delegateObj : DelegateProtocol!
     var viewModel : LeagueDetailsViewModel!
     static var upcommingEvents: [EventDetails]=[]
-    static var endpoint : String?
+    //static var endpoint : String?
     static var leagueID : Int?
     var index : Int?
 
@@ -73,7 +73,7 @@ extension UpCommingTableViewCell{
         }
     }
     func getURL()-> URL{
-        let url = URL(string: URLServiceForEvent(endPoint: UpCommingTableViewCell.endpoint ?? "", fromDate: "2023-01-18",toDate: "2024-01-18",leagueID: String(UpCommingTableViewCell.leagueID.self ?? 0)).url)!
+        let url = URL(string: URLServiceForEvent(endPoint: SportsCollectionViewController.endpoint ?? "", fromDate: "2023-01-18",toDate: "2024-01-18",leagueID: String(UpCommingTableViewCell.leagueID.self ?? 0)).url)!
         return url
     }
 }

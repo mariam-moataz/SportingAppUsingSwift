@@ -13,7 +13,8 @@ class LeaguesTableViewController: UITableViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var leagues : [LeagueDetails]=[]
     var viewModel : LeagueViewModel!
-    var endpoint : String!
+    
+    //var endpoint : String!
     var leagueID : Int!
     var index : Int!
     override func viewDidLoad() {
@@ -42,7 +43,19 @@ class LeaguesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
         cell.favoriteLeagueName?.text = leagues[indexPath.row].league_name
-        switch endpoint{
+        if SportsCollectionViewController.endpoint == "football"{
+            let url = URL(string: leagues[indexPath.row].league_logo ?? "")
+            cell.favoriteLeagueImage?.kf.setImage(with: url,placeholder: UIImage(named: "football"))
+        }
+        else{
+            cell.favoriteLeagueImage.image = UIImage(named: SportsCollectionViewController.endpoint)
+        }
+        cell.backgroundColor = UIColor.white
+        cell.layer.borderColor = UIColor.black.cgColor
+        cell.layer.borderWidth = 6
+        cell.layer.cornerRadius = 15
+        cell.clipsToBounds = true
+        /*switch endpoint{
         case "basketball":
             cell.favoriteLeagueImage?.image = UIImage(named: "basketball")
         case "cricket":
@@ -52,7 +65,7 @@ class LeaguesTableViewController: UITableViewController {
         default:
             let url = URL(string: leagues[indexPath.row].league_logo ?? "")
             cell.favoriteLeagueImage?.kf.setImage(with: url,placeholder: UIImage(named: "football"))
-        }
+        }*/
         return cell
     }
  
@@ -66,7 +79,7 @@ class LeaguesTableViewController: UITableViewController {
         if segue.destination is LeguesDetailsTableViewController{
             let vc = segue.destination as? LeguesDetailsTableViewController
             vc!.leagueID = self.leagueID
-            vc!.endpoint = self.endpoint
+            //vc!.endpoint = self.endpoint
             vc!.league = leagues[index]
         }
     }
@@ -103,7 +116,7 @@ extension LeaguesTableViewController{
         }
     }
     func getURL()-> URL{
-        let url = URL(string: URLService(endPoint: self.endpoint).url)!
+        let url = URL(string: URLService(endPoint: SportsCollectionViewController.endpoint).url)!
         return url
     }
 }

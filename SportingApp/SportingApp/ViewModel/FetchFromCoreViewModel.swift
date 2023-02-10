@@ -8,8 +8,11 @@
 import Foundation
 import CoreData
 
+
 class FetchFromCoreViewModel{
-    func fetchCoreData(appDelegate : AppDelegate) -> [NSManagedObject]{
-        return fetchFromCore(appDelegate: appDelegate)
+    func callManagerToFetch(appDelegate : AppDelegate) -> [LeagueDetails]?{
+        let coreDataManager = CoreDataManager()
+        return coreDataManager.fetchCoreData(appDelegate: appDelegate)
     }
 }
+
