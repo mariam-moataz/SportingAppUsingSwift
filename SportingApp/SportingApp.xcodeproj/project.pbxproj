@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		033AFABE299457C800E44036 /* TeamDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033AFABD299457C800E44036 /* TeamDetailsViewModel.swift */; };
 		036385AC2990218D00614AA3 /* LeagueDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036385AB2990218D00614AA3 /* LeagueDetailsViewModel.swift */; };
+		0366BE002997ADA5003F2AB1 /* LegueDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0366BDFF2997ADA5003F2AB1 /* LegueDetailsViewController.swift */; };
 		037D8B0929956C4100320870 /* LatestResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 037D8B0729956C4100320870 /* LatestResultTableViewCell.xib */; };
 		037D8B0D29956D2B00320870 /* LatestVerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 037D8B0B29956D2B00320870 /* LatestVerCollectionViewCell.xib */; };
 		03C06936298A97A500322593 /* TeamsHorizintalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C06934298A97A500322593 /* TeamsHorizintalTableViewCell.swift */; };
@@ -102,6 +103,7 @@
 /* Begin PBXFileReference section */
 		033AFABD299457C800E44036 /* TeamDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailsViewModel.swift; sourceTree = "<group>"; };
 		036385AB2990218D00614AA3 /* LeagueDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueDetailsViewModel.swift; sourceTree = "<group>"; };
+		0366BDFF2997ADA5003F2AB1 /* LegueDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegueDetailsViewController.swift; sourceTree = "<group>"; };
 		037D8B0729956C4100320870 /* LatestResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LatestResultTableViewCell.xib; sourceTree = "<group>"; };
 		037D8B0B29956D2B00320870 /* LatestVerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LatestVerCollectionViewCell.xib; sourceTree = "<group>"; };
 		03C06934298A97A500322593 /* TeamsHorizintalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsHorizintalTableViewCell.swift; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 				C958D4292989A14F006E82C4 /* TableViewCell.swift */,
 				03CF15B22989E9530070AE16 /* HorizontalCollectionViewCell.swift */,
 				03C06938298A98C700322593 /* TeamsCollectionViewCell.swift */,
+				0366BDFF2997ADA5003F2AB1 /* LegueDetailsViewController.swift */,
 			);
 			path = ConrollersForOutlets;
 			sourceTree = "<group>";
@@ -748,6 +751,7 @@
 				03CF15B42989E9530070AE16 /* HorizontalCollectionViewCell.swift in Sources */,
 				C958D3ED29895877006E82C4 /* AppDelegate.swift in Sources */,
 				C9961EA0298DD74400AAE7E8 /* HelperFunctions.swift in Sources */,
+				0366BE002997ADA5003F2AB1 /* LegueDetailsViewController.swift in Sources */,
 				C90BE0DE29969C2A00AE7892 /* DateConverter.swift in Sources */,
 				C97F360029956296003D0683 /* CoreDataManager.swift in Sources */,
 				C905012E2994349700B9380E /* FetchFromCoreService.swift in Sources */,
