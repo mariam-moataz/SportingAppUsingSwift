@@ -52,17 +52,6 @@ class LeaguesTableViewController: UITableViewController {
             cell.favoriteLeagueImage.image = UIImage(named: SportsCollectionViewController.endpoint)
         }
         cell.cellframe()
-        /*switch endpoint{
-        case "basketball":
-            cell.favoriteLeagueImage?.image = UIImage(named: "basketball")
-        case "cricket":
-            cell.favoriteLeagueImage?.image = UIImage(named: "cricket")
-        case "tennis":
-            cell.favoriteLeagueImage?.image = UIImage(named: "tennis")
-        default:
-            let url = URL(string: leagues[indexPath.row].league_logo ?? "")
-            cell.favoriteLeagueImage?.kf.setImage(with: url,placeholder: UIImage(named: "football"))
-        }*/
         return cell
     }
  

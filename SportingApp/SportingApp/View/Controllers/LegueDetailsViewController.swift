@@ -27,7 +27,8 @@ class LegueDetailsViewController: UIViewController {
     var teamkey : Int?
     var teamID : Int?
     var ref : DelegateForCell?
-static var leagueID : Int?
+    //static var leagueID : Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,7 +62,6 @@ static var leagueID : Int?
                 self.latestCollection.reloadData()
                 self.teamsOrPlayerCollection.reloadData()
             }
-            //self.teamsArr = self.upcommingEvents + self.latestResults
         }
         
        
@@ -94,14 +94,12 @@ static var leagueID : Int?
         operation3.addDependency(operation2)
         
         queue.addOperations([operation1,operation2,operation3], waitUntilFinished: true)
-//        self.upcommingcollection.reloadData()
-//        self.latestCollection.reloadData()
-//        self.teamsOrPlayerCollection.reloadData()
     }
+    
     @IBAction func staract(_ sender: UIButton) {
         staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
         let saveToCoreViewModel = SavetoCoreViewModel()
-       // league.endpoint = SportsCollectionViewController.getEndPoint()
+        league.endpoint = SportsCollectionViewController.getEndPoint()
         saveToCoreViewModel.callManagerToSave(league : league, appDelegate : appDelegate)
     }
 }
@@ -184,9 +182,7 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
         else {  return CGSize(width:200, height: 200)  }
     }
     
-    
-    
-    
+        
     func upCommingCollectionRenderView(events: [EventDetails]?){
         guard let newItems = events else{return}
         upcommingEvents = newItems
@@ -242,7 +238,7 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
         if   collectionView == teamsOrPlayerCollection {
             print("selected")
             TeamDetailsViewController.teamId = self.teamID
-        var  teamdetails =   self.storyboard?.instantiateViewController(withIdentifier: "teamsViewController") as? TeamDetailsViewController
+            let teamdetails = self.storyboard?.instantiateViewController(withIdentifier: "teamsViewController") as? TeamDetailsViewController
             self.present(teamdetails!, animated: true)
             
         }
