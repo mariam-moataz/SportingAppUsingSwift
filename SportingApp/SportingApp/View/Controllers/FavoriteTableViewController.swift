@@ -24,6 +24,8 @@ class FavoriteTableViewController: UITableViewController {
         super.viewDidLoad()
         //nipFileConfig()
         tableView.nipConfig(nipname: "TableViewCell", cellIdentifier: "cell")
+        tableView.reloadData()
+
         tabBarItem.badgeValue = String(leagues?.count ?? 0)
         tabBarItem.badgeColor = .black
     }
@@ -34,6 +36,7 @@ class FavoriteTableViewController: UITableViewController {
         tableView.reloadData()
         tabBarItem.badgeValue = String(leagues?.count ?? 0)
         tabBarItem.badgeColor = .black
+     
     }
     // MARK: - Table view data source
     
@@ -90,6 +93,8 @@ class FavoriteTableViewController: UITableViewController {
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
             
             tableView.reloadData()
+            tabBarItem.badgeValue = String(leagues?.count ?? 0)
+
       }
     }
     

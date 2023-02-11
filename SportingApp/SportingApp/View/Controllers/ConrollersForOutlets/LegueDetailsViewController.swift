@@ -98,10 +98,17 @@ static var leagueID : Int?
 //        self.latestCollection.reloadData()
 //        self.teamsOrPlayerCollection.reloadData()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        if league.league_state == true
+        {
+            staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        }
+    }
     @IBAction func staract(_ sender: UIButton) {
         staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
         let saveToCoreViewModel = SavetoCoreViewModel()
        // league.endpoint = SportsCollectionViewController.getEndPoint()
+        league.league_state = true
         saveToCoreViewModel.callManagerToSave(league : league, appDelegate : appDelegate)
     }
 }
