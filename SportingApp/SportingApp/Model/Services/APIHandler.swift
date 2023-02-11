@@ -20,9 +20,9 @@ class APIHandler
         guard let newurl = url else{return}
         
         AF.request(newurl, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil, interceptor: nil).response { response in
+            
             switch response.result{
             case .success(let data):
-                
                 switch responsee {
                 case is LeagueAPIResponse :
                     let jsonData : LeagueAPIResponse = convertFromJson(data: data!)

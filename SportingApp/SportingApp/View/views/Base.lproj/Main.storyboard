@@ -105,10 +105,10 @@
             </objects>
             <point key="canvasLocation" x="2633" y="-768"/>
         </scene>
-        <!--story-->
+        <!--story2-->
         <scene sceneID="iKD-CD-mvc">
             <objects>
-                <viewControllerPlaceholder storyboardName="SecondStoryboard" referencedIdentifier="story" id="Mqr-GX-2nW" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="SecondStoryboard" referencedIdentifier="story2" id="Mqr-GX-2nW" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="KjT-8s-nWY"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6zC-Ke-hyK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -193,7 +193,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="N0r-c4-gMf"/>
+        <segue reference="VoZ-60-CCh"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="volleyball" width="2000" height="1335"/>
