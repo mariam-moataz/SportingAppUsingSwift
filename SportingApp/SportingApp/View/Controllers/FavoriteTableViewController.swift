@@ -22,7 +22,8 @@ class FavoriteTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nipFileConfig()
+        //nipFileConfig()
+        tableView.nipConfig(nipname: "TableViewCell", cellIdentifier: "cell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,7 +44,7 @@ class FavoriteTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
-        cell.favoriteLeagueName?.text = leagues?[indexPath.row].league_name
+        cell.favoriteLeagueName?.text = leagues?[indexPath.row].endpoint
         cell.favoriteLeagueImage?.image = UIImage(named: "sports")
         cell.cellframe()
         return cell
@@ -79,12 +80,11 @@ class FavoriteTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            //print("Deleted")
-            let league = leagues?[indexPath.row]
-            self.leagues?.remove(at: indexPath.row)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
             let deleteViewModel = DeleteFromCoreViewModel()
             deleteViewModel.callManagerToDelete(league: (leagues?[indexPath.row])!, appDelegate: appDelegate)
+            self.leagues?.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            
             tableView.reloadData()
       }
     }
@@ -92,9 +92,10 @@ class FavoriteTableViewController: UITableViewController {
 }
 
 extension FavoriteTableViewController{
-    func nipFileConfig(){
+   /* func nipFileConfig(){
         let nib = UINib(nibName: "TableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "cell")
-    }
+    }*/
 }
+
 

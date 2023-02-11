@@ -18,7 +18,8 @@ class LeaguesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nipFileConfig()
+        tableView.nipConfig(nipname: "TableViewCell", cellIdentifier: "cell")
+        //nipFileConfig()
         viewModel = LeagueViewModel()
         viewModel.getItems(url:getURL())
         viewModel.bindResultToTableViewController = { () in  self.renderView(legues: self.viewModel.vmResult)}
@@ -88,15 +89,16 @@ class LeaguesTableViewController: UITableViewController {
 }
 
 extension LeaguesTableViewController{
-    func nipFileConfig(){
+    /*func nipFileConfig(){
         let nib = UINib(nibName: "TableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "cell")
-    }
+    }*/
     
     func renderView(legues: [LeagueDetails]?){
         guard let newItems = legues else{return}
         self.leagues = newItems
         DispatchQueue.main.async {
+            setUserDefaultsForSportsEndpoints()
             self.tableView.reloadData()
         }
     }

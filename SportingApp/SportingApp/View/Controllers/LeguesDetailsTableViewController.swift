@@ -17,7 +17,10 @@ class LeguesDetailsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.nipFileConfig()
+        //self.nipFileConfig()
+        tableView.nipConfig(nipname: "UpCommingTableViewCell", cellIdentifier: "cell1")
+        tableView.nipConfig(nipname: "LatestResultTableViewCell", cellIdentifier: "cellfortable")
+        tableView.nipConfig(nipname: "TeamsHorizintalTableViewCell", cellIdentifier: "cell3")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,20 +70,21 @@ class LeguesDetailsTableViewController: UITableViewController {
     @IBAction func staract(_ sender: UIButton) {
         staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
         let saveToCoreViewModel = SavetoCoreViewModel()
+        league.endpoint = SportsCollectionViewController.getEndPoint()
         saveToCoreViewModel.callManagerToSave(league : league, appDelegate : appDelegate)
     }
 }
     
 
 extension LeguesDetailsTableViewController{
-    func nipFileConfig(){
+    /*func nipFileConfig(){
         let nib = UINib(nibName: "UpCommingTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "cell1")
         let nib2 = UINib(nibName: "LatestResultTableViewCell", bundle: nil) //latest results
         tableView.register(nib2, forCellReuseIdentifier: "cellfortable")
         let nib3 = UINib(nibName: "TeamsHorizintalTableViewCell", bundle: nil)
         tableView.register(nib3, forCellReuseIdentifier: "cell3")
-    }
+    }*/
     
 }
 
@@ -94,13 +98,3 @@ extension LeguesDetailsTableViewController : DelegateForCell{
     
 }
 
-extension UITableViewCell{
-    func cellframe()
-    {
-        self.backgroundColor = UIColor.white
-        self.layer.borderColor = UIColor.black.cgColor
-        self.layer.borderWidth = 6
-        self.layer.cornerRadius = 15
-        self.clipsToBounds = true
-    }
-}

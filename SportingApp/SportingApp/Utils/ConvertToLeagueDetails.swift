@@ -14,13 +14,15 @@ class ConvertToLeagueDetails : ConvertToLeagueDetailsProtocol{
         guard !nsManagedObject.isEmpty else{return nil}
         var leagueArr : [LeagueDetails] = []
         for objectIndex in 0...nsManagedObject.count-1{
-            var league = LeagueDetails()
+            let league = LeagueDetails()
             league.league_key = nsManagedObject[objectIndex].value(forKey: "league_key") as? Int ?? 0
             league.league_name = nsManagedObject[objectIndex].value(forKey: "league_name") as? String ?? " "
             league.country_key = nsManagedObject[objectIndex].value(forKey: "country_key") as? Int ?? 0
             league.country_name = nsManagedObject[objectIndex].value(forKey: "country_name") as? String ?? " "
             league.league_logo = nsManagedObject[objectIndex].value(forKey: "league_logo") as? String ?? " "
             league.country_logo = nsManagedObject[objectIndex].value(forKey: "country_logo") as? String ?? " "
+            league.endpoint = nsManagedObject[objectIndex].value(forKey: "endpoint") as? String ?? " "
+            league.league_state = nsManagedObject[objectIndex].value(forKey: "league_state") as? Bool
             leagueArr.append(league)
         }
         return leagueArr

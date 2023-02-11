@@ -15,4 +15,6 @@ class LeagueDetails : Decodable{
     var country_name : String?
     var league_logo : String?
     var country_logo : String?
+    var endpoint : String?
+    var league_state : Bool?
 }

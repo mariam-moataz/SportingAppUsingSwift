@@ -24,8 +24,9 @@ class TeamsHorizintalTableViewCell: UITableViewCell {
         super.awakeFromNib()
         teamsCollection.delegate = self
         teamsCollection.dataSource = self
-        let nib = UINib(nibName: "TeamsCollectionViewCell", bundle: nil)
-        teamsCollection.register(nib, forCellWithReuseIdentifier: "cell")
+        teamsCollection.nipConfig(nipname: "TeamsCollectionViewCell", cellIdentifier: "cell")
+        //let nib = UINib(nibName: "TeamsCollectionViewCell", bundle: nil)
+        //teamsCollection.register(nib, forCellWithReuseIdentifier: "cell")
         //teamsCollection.reloadData()
     }
 

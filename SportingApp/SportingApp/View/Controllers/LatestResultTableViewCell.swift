@@ -22,7 +22,8 @@ class LatestResultTableViewCell: UITableViewCell {
 
         latestResultCollection.delegate = self
         latestResultCollection.dataSource = self
-        nipFileConfig()
+        //nipFileConfig()
+        latestResultCollection.nipConfig(nipname: "LatestVerCollectionViewCell", cellIdentifier: "cellforcollection")
         if SportsCollectionViewController.getEndPoint() == "tennis"{
             tennisViewModel = TennisDetailsViewModel()
             tennisViewModel.getItems(url:getURL())
@@ -82,10 +83,10 @@ extension LatestResultTableViewCell : UICollectionViewDelegate , UICollectionVie
     
 }
 extension LatestResultTableViewCell{
-    func nipFileConfig(){
+    /*func nipFileConfig(){
         let nib = UINib(nibName: "LatestVerCollectionViewCell", bundle: nil)
         latestResultCollection.register(nib, forCellWithReuseIdentifier: "cellforcollection")
-    }
+    }*/
     
     func renderView(events: [EventDetails]?){
         guard let newItems = events else{return}

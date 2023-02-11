@@ -75,19 +75,4 @@ extension SportsCollectionViewController : UICollectionViewDelegateFlowLayout{
     }
 }
 
-func getSportEndPoint(endpoint: String) -> (String){
-    var endpointTobeReturned : String!
-    switch endpoint{
-    case "football":
-        endpointTobeReturned = "football"
-    case "basketball":
-        endpointTobeReturned = "basketball"
-    case "cricket":
-        endpointTobeReturned = "cricket"
-    case "tennis":
-        endpointTobeReturned = "tennis"
-    default:
-        endpointTobeReturned = ""
-    }
-    return endpointTobeReturned
-}
+

@@ -79,6 +79,7 @@
 		C9961EA2298DDB7000AAE7E8 /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9961EA1298DDB7000AAE7E8 /* JSONDecoder.swift */; };
 		C9961EA6298DDBFC00AAE7E8 /* URLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9961EA5298DDBFC00AAE7E8 /* URLService.swift */; };
 		C9961EAA298DEE1C00AAE7E8 /* RenderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9961EA9298DEE1C00AAE7E8 /* RenderProtocol.swift */; };
+		C9A1FAF92997294E0008EB84 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A1FAF82997294E0008EB84 /* UIExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,6 +180,7 @@
 		C9961EA1298DDB7000AAE7E8 /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		C9961EA5298DDBFC00AAE7E8 /* URLService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLService.swift; sourceTree = "<group>"; };
 		C9961EA9298DEE1C00AAE7E8 /* RenderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderProtocol.swift; sourceTree = "<group>"; };
+		C9A1FAF82997294E0008EB84 /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		CDE133FEC3E15C09DCD73644 /* Pods_SportingApp_SportingAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SportingApp_SportingAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D70E54954B9D710E07935598 /* Pods_SportingAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SportingAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -398,6 +400,7 @@
 				C9961E9C298DCA5B00AAE7E8 /* Sport.swift */,
 				C97F360529957204003D0683 /* ConvertToLeagueDetails.swift */,
 				C90BE0DD29969C2A00AE7892 /* DateConverter.swift */,
+				C9A1FAF82997294E0008EB84 /* UIExtensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -725,6 +728,7 @@
 				C9961EAA298DEE1C00AAE7E8 /* RenderProtocol.swift in Sources */,
 				C94CFA712996E719005DA789 /* TennisPlayerDetials.swift in Sources */,
 				03C06936298A97A500322593 /* TeamsHorizintalTableViewCell.swift in Sources */,
+				C9A1FAF92997294E0008EB84 /* UIExtensions.swift in Sources */,
 				C90981C1298C1B4500471C23 /* APIHandler.swift in Sources */,
 				C905012B2994343D00B9380E /* SavetoCoreViewModel.swift in Sources */,
 				C9961EA2298DDB7000AAE7E8 /* JSONDecoder.swift in Sources */,

@@ -25,7 +25,8 @@ class SaveCoreData{
         leagueArray.setValue(favoriteLeague.country_key, forKey: "country_key")
         leagueArray.setValue(favoriteLeague.country_name, forKey: "country_name")
         leagueArray.setValue(favoriteLeague.country_logo, forKey: "country_logo")
-        
+        leagueArray.setValue(favoriteLeague.endpoint, forKey: "endpoint")
+        leagueArray.setValue(favoriteLeague.league_state, forKey: "league_state")
         //5
         do{
             try managedContext.save()
