@@ -149,7 +149,7 @@
         <!--Legue Details View Controller-->
         <scene sceneID="ecK-fT-Z45">
             <objects>
-                <viewController id="bKw-0m-pNZ" customClass="LegueDetailsViewController" customModule="SportingApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="story2" id="bKw-0m-pNZ" customClass="LegueDetailsViewController" customModule="SportingApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RGU-MR-su8">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
