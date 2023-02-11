@@ -31,7 +31,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" image="star" catalog="system">
-                                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="25"/>
+                                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="28"/>
                                             </buttonConfiguration>
                                             <connections>
                                                 <action selector="staract:" destination="ujV-ea-xBh" eventType="touchUpInside" id="CPi-o4-cWb"/>
@@ -155,7 +155,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ayE-yh-xDi">
-                                <rect key="frame" x="0.0" y="105" width="393" height="198"/>
+                                <rect key="frame" x="0.0" y="136" width="393" height="190"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8rt-V7-UH0">
@@ -166,7 +166,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="PEC-c8-umE">
-                                        <rect key="frame" x="0.0" y="35" width="128" height="128"/>
+                                        <rect key="frame" x="0.0" y="31" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="7QV-dU-j07">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -217,6 +217,28 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RMR-6o-CLZ">
+                                <rect key="frame" x="0.0" y="79" width="390" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="LegueDetails" id="pn5-e8-dex">
+                                        <barButtonItem key="rightBarButtonItem" style="plain" id="VVG-Bl-hTd">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="33i-au-0ZI">
+                                                <rect key="frame" x="287" y="0.0" width="87" height="44"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="star" catalog="system" title="">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="28"/>
+                                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="staract:" destination="bKw-0m-pNZ" eventType="touchUpInside" id="AeB-Rh-jrl"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="655-0c-94s"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -224,6 +246,7 @@
                     <navigationItem key="navigationItem" id="mV8-qP-viF"/>
                     <connections>
                         <outlet property="latestCollection" destination="p1X-db-DBt" id="J8l-cK-Feh"/>
+                        <outlet property="staroutlet" destination="33i-au-0ZI" id="z3G-OV-eNf"/>
                         <outlet property="teamsOrPlayerCollection" destination="4rx-se-M3H" id="Iyx-Q1-uCW"/>
                         <outlet property="upcommingcollection" destination="ayE-yh-xDi" id="WyH-In-fvg"/>
                     </connections>

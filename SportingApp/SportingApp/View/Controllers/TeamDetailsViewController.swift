@@ -25,9 +25,7 @@ class TeamDetailsViewController: UIViewController {
         viewModel.bindResultToTableViewController = { () in self.renderView(team: self.viewModel.vmResult )}
         teamlogoimg.layer.cornerRadius = teamlogoimg.frame.width/2
         teamlogoimg.clipsToBounds = true
-        teamNameLabel.text = team.team_name ?? "lklk"
-        let url = URL(string: team.team_logo ?? " ")
-        teamlogoimg?.kf.setImage(with: url,placeholder: UIImage(named: "football"))
+        
         
     }
 }
@@ -68,7 +66,10 @@ extension TeamDetailsViewController : UITableViewDelegate, UITableViewDataSource
         cell.clipsToBounds = true
         cell.favoriteLeagueName.text = team.players?[indexPath.row].player_name
             let url = URL(string: team.players?[indexPath.row].player_image ?? " ")
-            cell.favoriteLeagueImage?.kf.setImage(with: url,placeholder: UIImage(named: "football"))
+            cell.favoriteLeagueImage?.kf.setImage(with: url,placeholder: UIImage(named: "player"))
+       // teamNameLabel.text = team.team_name ?? "lklk"
+        let url2 = URL(string: team.team_logo ?? " ")
+        teamlogoimg?.kf.setImage(with: url2,placeholder: UIImage(named: "teams"))
         return cell
     }
     

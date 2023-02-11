@@ -24,12 +24,16 @@ class FavoriteTableViewController: UITableViewController {
         super.viewDidLoad()
         //nipFileConfig()
         tableView.nipConfig(nipname: "TableViewCell", cellIdentifier: "cell")
+        tabBarItem.badgeValue = String(leagues?.count ?? 0)
+        tabBarItem.badgeColor = .black
     }
     
     override func viewWillAppear(_ animated: Bool) {
         viewModel = FetchFromCoreViewModel()
         leagues = viewModel.callManagerToFetch(appDelegate: appDelegate)
         tableView.reloadData()
+        tabBarItem.badgeValue = String(leagues?.count ?? 0)
+        tabBarItem.badgeColor = .black
     }
     // MARK: - Table view data source
     
@@ -44,7 +48,7 @@ class FavoriteTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
-        cell.favoriteLeagueName?.text = leagues?[indexPath.row].endpoint
+        cell.favoriteLeagueName?.text = leagues?[indexPath.row].league_name
         cell.favoriteLeagueImage?.image = UIImage(named: "sports")
         cell.cellframe()
         return cell
