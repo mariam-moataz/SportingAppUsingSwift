@@ -7,25 +7,30 @@
 
 import UIKit
 
-class TeamDetailsViewController: UIViewController {
+class TeamDetailsViewController: UIViewController ,TeamURLProtocol {
+    var teamUrl : TeamDetailsUrl!
+    
+    
     var team : TeamDetails!
     var viewModel : TeamDetailsViewModel!
+    
     static var teamId : Int?
     @IBOutlet weak var teamlogoimg: UIImageView!
     @IBOutlet weak var teamNameLabel: UILabel!
     @IBOutlet weak var teamsTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        teamUrl = TeamDetailsUrl()
         teamsTable.delegate = self
         teamsTable.dataSource = self
         nipFileConfig()
         viewModel = TeamDetailsViewModel()
-        viewModel.getItems(url:getURL())
+        viewModel.getItems(url:getTeamURL())
         team = TeamDetails()
         viewModel.bindResultToTableViewController = { () in self.renderView(team: self.viewModel.vmResult )}
         teamlogoimg.layer.cornerRadius = teamlogoimg.frame.width/2
         teamlogoimg.clipsToBounds = true
-        
+      
         
     }
 }
@@ -52,10 +57,10 @@ extension TeamDetailsViewController : UITableViewDelegate, UITableViewDataSource
     }
     
     
-    func getURL()-> URL{
-        let url = URL(string: URLServiceForTeams(endPoint: "football" , teamId: TeamDetailsViewController.teamId! ).url)!
-        return url
-    }
+//    func getURL()-> URL{
+//        let url = URL(string: URLServiceForTeams(endPoint: "football" , teamId: TeamDetailsViewController.teamId! ).url)!
+//        return url
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = teamsTable.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
@@ -80,5 +85,7 @@ extension TeamDetailsViewController : UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return team.players?.count ?? 0
     }
-    
+    func getTeamURL() -> URL {
+        teamUrl.getTeamURL()
+    }
 }
