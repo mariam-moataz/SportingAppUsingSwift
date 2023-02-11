@@ -20,13 +20,15 @@ class UpCommingTableViewCell: UITableViewCell {
         super.awakeFromNib()
         upcomingColletion.delegate = self
         upcomingColletion.dataSource = self
-        nipFileConfig()
-        
+        //nipFileConfig()
+        upcomingColletion.nipConfig(nipname: "HorizontalCollectionViewCell", cellIdentifier: "cell")
         viewModel = LeagueDetailsViewModel()
         viewModel.getItems(url:getURL())
         viewModel.bindResultToTableViewController = { () in  self.renderView(events: self.viewModel.vmResult)}
+        //upcomingColletion.reloadData()
     }
 
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -56,16 +58,15 @@ extension UpCommingTableViewCell : UICollectionViewDelegate , UICollectionViewDa
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
         {
-            //(UIScreen.main.bounds.size.width/2.0)
            return CGSize(width:200, height: 200)
         }
     
 }
 extension UpCommingTableViewCell{
-    func nipFileConfig(){
+    /*func nipFileConfig(){
         let nib = UINib(nibName: "HorizontalCollectionViewCell", bundle: nil)
         upcomingColletion.register(nib, forCellWithReuseIdentifier: "cell")
-    }
+    }*/
     
     func renderView(events: [EventDetails]?){
         guard let newItems = events else{return}

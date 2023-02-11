@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class CoreDataManager : SavetoCoreProtocol,FetchFromCoreProtocol{
+class CoreDataManager : SavetoCoreProtocol,FetchFromCoreProtocol,DeleteFromCoreProtocol{
     
     func saveItems(league: LeagueDetails, appDelegate: AppDelegate) {
         let saveCoreData = SaveCoreData()
@@ -18,5 +18,10 @@ class CoreDataManager : SavetoCoreProtocol,FetchFromCoreProtocol{
     func fetchCoreData(appDelegate: AppDelegate) -> [LeagueDetails]?{
         let fetchCoreData = FetchCoreData()
         return fetchCoreData.fetchFromCore(appDelegate: appDelegate)
-    }    
+    }
+    
+    func deleteItem(league: LeagueDetails, appDelegate: AppDelegate) {
+        let deleteFromCore = DeleteFromCoreService()
+        deleteFromCore.deleteFromCore(league: league, appDelegate: appDelegate)
+    }
 }

@@ -18,15 +18,15 @@ class FavoriteTableViewController: UITableViewController {
     var network : Reachability!
     var leagues : [LeagueDetails]?
     var leagueID : Int!
-    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        nipFileConfig()
+        //nipFileConfig()
+        tableView.nipConfig(nipname: "TableViewCell", cellIdentifier: "cell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         viewModel = FetchFromCoreViewModel()
         leagues = viewModel.callManagerToFetch(appDelegate: appDelegate)
         tableView.reloadData()
@@ -44,13 +44,9 @@ class FavoriteTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
-        cell.favoriteLeagueName?.text = leagues?[indexPath.row].league_name
+        cell.favoriteLeagueName?.text = leagues?[indexPath.row].endpoint
         cell.favoriteLeagueImage?.image = UIImage(named: "sports")
-        cell.backgroundColor = UIColor.white
-        cell.layer.borderColor = UIColor.black.cgColor
-        cell.layer.borderWidth = 6
-        cell.layer.cornerRadius = 15
-        cell.clipsToBounds = true
+        cell.cellframe()
         return cell
     }
     
@@ -72,7 +68,7 @@ class FavoriteTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is LeguesDetailsTableViewController{
-            let vc = segue.destination as? LeguesDetailsTableViewController
+            _ = segue.destination as? LeguesDetailsTableViewController
             //vc!.leagueID = leagueID
         }
     }
@@ -81,12 +77,25 @@ class FavoriteTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let deleteViewModel = DeleteFromCoreViewModel()
+            deleteViewModel.callManagerToDelete(league: (leagues?[indexPath.row])!, appDelegate: appDelegate)
+            self.leagues?.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            tableView.reloadData()
+      }
+    }
+    
 }
 
 extension FavoriteTableViewController{
-    func nipFileConfig(){
+   /* func nipFileConfig(){
         let nib = UINib(nibName: "TableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "cell")
-    }
+    }*/
 }
+
 

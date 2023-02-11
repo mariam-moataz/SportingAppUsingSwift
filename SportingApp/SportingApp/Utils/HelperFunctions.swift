@@ -30,3 +30,36 @@ func getSports() -> [Sport]{
     sports.append(hockey)
     return sports
 }
+
+func getSportEndPoint(endpoint: String) -> (String){
+    var endpointTobeReturned : String!
+    switch endpoint{
+    case "football":
+        endpointTobeReturned = "football"
+    case "basketball":
+        endpointTobeReturned = "basketball"
+    case "cricket":
+        endpointTobeReturned = "cricket"
+    case "tennis":
+        endpointTobeReturned = "tennis"
+    default:
+        endpointTobeReturned = ""
+    }
+    return endpointTobeReturned
+}
+
+func setUserDefaultsForSportsEndpoints(){
+    if SportsCollectionViewController.getEndPoint() == "football"{
+        UserDefaults.standard.set(true,forKey: "football")
+    }
+    else if SportsCollectionViewController.getEndPoint() == "basketball"{
+        UserDefaults.standard.set(true,forKey: "basketball")
+    }
+    else if SportsCollectionViewController.getEndPoint() == "cricket"{
+        UserDefaults.standard.set(true,forKey: "cricket")
+    }
+    else{
+        UserDefaults.standard.set(true,forKey: "tennis")
+    }
+}
+

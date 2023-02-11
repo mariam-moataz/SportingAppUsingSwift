@@ -24,3 +24,8 @@ class EventAPIResponse : Decodable{
     var success : Int?
     var result : [EventDetails]?
 }
+
+class TennisAPIResponse : Decodable{
+    var success : Int?
+    var result : [TennisDetails]?
+}

@@ -14,15 +14,6 @@ struct URLService { //leagues
         return "https://apiv2.allsportsapi.com/\(endPoint)/?met=Leagues&APIkey=\(key)"
     }
 }
-struct URLServiceForTeams {//teams
-
-    var endPoint: String = ""
-    var key : String = "6437cc9732c785914d4adaf9d36f18672470b1515d1bc8f1a4bfae02e151a7ef"
-    var teamId = 96
-    var url: String {
-        return "https://apiv2.allsportsapi.com/\(endPoint)/?&met=Teams&teamId=\(teamId)&APIkey=\(key)"
-    }
-}
 
 struct URLServiceForEvent{ //Upcomming events and latest results
     var endPoint: String = ""
@@ -32,7 +23,25 @@ struct URLServiceForEvent{ //Upcomming events and latest results
     var leagueID : Int = 0
     var url: String {
         return "https://apiv2.allsportsapi.com/\(endPoint)?met=Fixtures&leagueId=\(leagueID)&from=\(fromDate)&to=\(toDate)&APIkey=\(key)"
-        
     }
 }
 
+struct URLServiceForTeams {//teams
+
+    var endPoint: String = ""
+    var key : String = "6437cc9732c785914d4adaf9d36f18672470b1515d1bc8f1a4bfae02e151a7ef"
+    var teamId = 0
+    var url: String {
+        return "https://apiv2.allsportsapi.com/\(endPoint)/?&met=Teams&teamId=\(teamId)&APIkey=\(key)"
+    }
+}
+
+struct URLServiceForTennisPlayers {//TennisPlayers
+
+    var endPoint: String = ""
+    var key : String = "6437cc9732c785914d4adaf9d36f18672470b1515d1bc8f1a4bfae02e151a7ef"
+    var playerId = 0
+    var url: String {
+        return "https://apiv2.allsportsapi.com/\(endPoint)/?&met=Players&playerId=\(playerId)&APIkey=\(key)"
+    }
+}
