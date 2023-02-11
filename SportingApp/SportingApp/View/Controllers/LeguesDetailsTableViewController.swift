@@ -17,8 +17,11 @@ class LeguesDetailsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.nipFileConfig()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
     }
     
     // MARK: - Table view data source
@@ -37,17 +40,20 @@ class LeguesDetailsTableViewController: UITableViewController {
         case 0 : //upcomming events
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! UpCommingTableViewCell
             cell.cellframe()
+            cell.upcomingColletion.reloadData()
             return cell
 
         case 1 : //latest events
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellfortable", for: indexPath) as! LatestResultTableViewCell
             cell.cellframe()
+            cell.latestResultCollection.reloadData()
             return cell
         default: //teams
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell3", for: indexPath) as! TeamsHorizintalTableViewCell
-            cell.teamsCollection.reloadData()
-            cell.ref = self
             cell.cellframe()
+            cell.ref = self
+            cell.teamsCollection.reloadData()
+
             return cell
         }
     }
@@ -61,7 +67,6 @@ class LeguesDetailsTableViewController: UITableViewController {
     @IBAction func staract(_ sender: UIButton) {
         staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
         let saveToCoreViewModel = SavetoCoreViewModel()
-        //saveToCoreViewModel.saveItems(league : league, appDelegate : appDelegate)
         saveToCoreViewModel.callManagerToSave(league : league, appDelegate : appDelegate)
     }
 }
@@ -81,7 +86,7 @@ extension LeguesDetailsTableViewController{
 
 extension LeguesDetailsTableViewController : DelegateForCell{
     func navigate(){
-        let TeamDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "teamsViewController") as!TeamDetailsViewController
+        let TeamDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "teamsViewController") as! TeamDetailsViewController
        
        // self.navigationController?.pushViewController(TeamDetailsVC, animated: true)
         self.present(TeamDetailsVC, animated: true, completion: nil)

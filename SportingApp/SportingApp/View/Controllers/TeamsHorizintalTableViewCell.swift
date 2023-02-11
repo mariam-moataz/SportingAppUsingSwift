@@ -10,7 +10,7 @@ import Kingfisher
 
 class TeamsHorizintalTableViewCell: UITableViewCell {
     
-   @IBOutlet  weak var teamsCollection: UICollectionView!
+   @IBOutlet weak var teamsCollection: UICollectionView!
     
     var table = LeguesDetailsTableViewController()
     var upCommingViewCell = UpCommingTableViewCell()
@@ -26,7 +26,7 @@ class TeamsHorizintalTableViewCell: UITableViewCell {
         teamsCollection.dataSource = self
         let nib = UINib(nibName: "TeamsCollectionViewCell", bundle: nil)
         teamsCollection.register(nib, forCellWithReuseIdentifier: "cell")
-        //teamsArr = LeguesDetailsTableViewController.latestResults + UpCommingTableViewCell.upcommingEvents
+        //teamsCollection.reloadData()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -43,9 +43,8 @@ extension TeamsHorizintalTableViewCell : UICollectionViewDelegate , UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! TeamsCollectionViewCell
-        let url = URL(string: TeamsHorizintalTableViewCell.teamsArr[indexPath.row].event_away_team_logo ?? "")
+        let url = URL(string: TeamsHorizintalTableViewCell.teamsArr[indexPath.row].event_home_team_logo ?? "")
         cell.teamImg.kf.setImage(with: url,placeholder: UIImage(named: "sports"))
-        
         teamID = TeamsHorizintalTableViewCell.teamsArr[indexPath.row].home_team_key
         teamkey = TeamsHorizintalTableViewCell.teamsArr[indexPath.row].home_team_key
         return cell

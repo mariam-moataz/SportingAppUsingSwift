@@ -33,6 +33,9 @@ class APIHandler
                 case is EventAPIResponse :
                     let jsonData : EventAPIResponse = convertFromJson(data: data!)
                     handler(jsonData)
+                case is TennisAPIResponse:
+                    let jsonData : TennisAPIResponse = convertFromJson(data: data!)
+                    handler(jsonData)
                 default :
                     print("NO Response")
                 }
