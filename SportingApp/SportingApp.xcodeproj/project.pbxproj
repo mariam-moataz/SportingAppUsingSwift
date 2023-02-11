@@ -366,6 +366,7 @@
 			children = (
 				C9886AF92994D1D100E2D989 /* ConrollersForOutlets */,
 				C958D42D2989A3D1006E82C4 /* FavoriteTableViewController.swift */,
+				0366BDFF2997ADA5003F2AB1 /* LegueDetailsViewController.swift */,
 				C90BE0D329967DF300AE7892 /* LatestResultTableViewCell.swift */,
 				C958D4232989874B006E82C4 /* SportsCollectionViewController.swift */,
 				C90BE0D129967DD100AE7892 /* TeamDetailsViewController.swift */,
@@ -417,7 +418,6 @@
 				C958D4292989A14F006E82C4 /* TableViewCell.swift */,
 				03CF15B22989E9530070AE16 /* HorizontalCollectionViewCell.swift */,
 				03C06938298A98C700322593 /* TeamsCollectionViewCell.swift */,
-				0366BDFF2997ADA5003F2AB1 /* LegueDetailsViewController.swift */,
 			);
 			path = ConrollersForOutlets;
 			sourceTree = "<group>";
