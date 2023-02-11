@@ -56,6 +56,7 @@ extension TeamsHorizintalTableViewCell : UICollectionViewDelegate , UICollection
            return CGSize(width:200, height: 200)
         }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         TeamDetailsViewController.teamId = self.teamID
         ref?.navigate()
     }

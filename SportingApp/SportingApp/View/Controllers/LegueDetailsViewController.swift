@@ -12,7 +12,9 @@ class LegueDetailsViewController: UIViewController {
     @IBOutlet weak var upcommingcollection: UICollectionView!
     @IBOutlet weak var latestCollection: UICollectionView!
     @IBOutlet weak var teamsOrPlayerCollection: UICollectionView!
-    
+    @IBOutlet weak var staroutlet: UIButton!
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var league : LeagueDetails!
     var upCommingViewModel : LeagueDetailsViewModel!
     var latestResultsViewModel : LeagueDetailsViewModel!
     var tennisViewModel : TennisDetailsViewModel!
@@ -25,7 +27,7 @@ class LegueDetailsViewController: UIViewController {
     var teamkey : Int?
     var teamID : Int?
     var ref : DelegateForCell?
-    
+static var leagueID : Int?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -96,8 +98,15 @@ class LegueDetailsViewController: UIViewController {
 //        self.latestCollection.reloadData()
 //        self.teamsOrPlayerCollection.reloadData()
     }
-
+    @IBAction func staract(_ sender: UIButton) {
+        staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        let saveToCoreViewModel = SavetoCoreViewModel()
+       // league.endpoint = SportsCollectionViewController.getEndPoint()
+        saveToCoreViewModel.callManagerToSave(league : league, appDelegate : appDelegate)
+    }
 }
+    
+
 
 extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout
 {
@@ -108,7 +117,7 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
         default:
             return 1
         }
-}
+    }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -128,7 +137,7 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
             return teamsArr.count
             
         }
-       
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -161,7 +170,7 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
         else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! TeamsCollectionViewCell
             let url = URL(string: teamsArr[indexPath.row].event_home_team_logo ?? "")
-            cell.teamImg.kf.setImage(with: url,placeholder: UIImage(named: "sports"))
+            cell.teamImg.kf.setImage(with: url,placeholder: UIImage(named: "teams"))
             teamID = teamsArr[indexPath.row].home_team_key
             teamkey = teamsArr[indexPath.row].home_team_key
             return cell
@@ -169,11 +178,11 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
-        {
-            if  collectionView == self.latestCollection
-            { return CGSize(width:400, height: 200)}
-            else {  return CGSize(width:200, height: 200)  }
-        }
+    {
+        if  collectionView == self.latestCollection
+        { return CGSize(width:400, height: 200)}
+        else {  return CGSize(width:200, height: 200)  }
+    }
     
     
     
@@ -230,7 +239,12 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        TeamDetailsViewController.teamId = self.teamID
-        ref?.navigate()
+        if   collectionView == teamsOrPlayerCollection {
+            print("selected")
+            TeamDetailsViewController.teamId = self.teamID
+        var  teamdetails =   self.storyboard?.instantiateViewController(withIdentifier: "teamsViewController") as? TeamDetailsViewController
+            self.present(teamdetails!, animated: true)
+            
+        }
     }
 }

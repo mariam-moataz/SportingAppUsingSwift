@@ -73,8 +73,8 @@ class LeaguesTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is LeguesDetailsTableViewController{
-            let vc = segue.destination as? LeguesDetailsTableViewController
+        if segue.destination is LegueDetailsViewController{
+            let vc = segue.destination as? LegueDetailsViewController
             //LeguesDetailsTableViewController.leagueID = self.leagueID
             //vc!.endpoint = self.endpoint
             vc!.league = leagues[index]
