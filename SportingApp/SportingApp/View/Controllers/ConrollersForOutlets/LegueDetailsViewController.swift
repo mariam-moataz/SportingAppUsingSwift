@@ -7,12 +7,14 @@
 
 import UIKit
 
-class LegueDetailsViewController: UIViewController {
+class LegueDetailsViewController: UIViewController ,UpcommingUrlProtocol , LatestURLProtocol {
     
     @IBOutlet weak var upcommingcollection: UICollectionView!
     @IBOutlet weak var latestCollection: UICollectionView!
     @IBOutlet weak var teamsOrPlayerCollection: UICollectionView!
     @IBOutlet weak var staroutlet: UIButton!
+    var latesturl : LatestURL!
+    var upcomingurl : UpcomingUrl!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var league : LeagueDetails!
     var upCommingViewModel : LeagueDetailsViewModel!
@@ -30,7 +32,8 @@ class LegueDetailsViewController: UIViewController {
 static var leagueID : Int?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        latesturl = LatestURL()
+        upcomingurl = UpcomingUrl()
         self.view.addSubview(upcommingcollection)
         self.view.addSubview(latestCollection)
         self.view.addSubview(teamsOrPlayerCollection)
@@ -176,8 +179,15 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
         }
         else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! TeamsCollectionViewCell
-            let url = URL(string: teamsArr[indexPath.row].event_home_team_logo ?? "")
-            cell.teamImg.kf.setImage(with: url,placeholder: UIImage(named: "teams"))
+            if SportsCollectionViewController.getEndPoint() == "football" {
+                let url = URL(string: teamsArr[indexPath.row].home_team_logo ?? "")
+                cell.teamImg.kf.setImage(with: url,placeholder: UIImage(named: "teams"))
+            }
+            else {
+                let url = URL(string: teamsArr[indexPath.row].event_home_team_logo ?? "")
+                cell.teamImg.kf.setImage(with: url,placeholder: UIImage(named: "teams"))
+               
+            }
             teamID = teamsArr[indexPath.row].home_team_key
             teamkey = teamsArr[indexPath.row].home_team_key
             return cell
@@ -187,7 +197,7 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
         if  collectionView == self.latestCollection
-        { return CGSize(width:400, height: 200)}
+        { return CGSize(width:400, height: 250)}
         else {  return CGSize(width:200, height: 200)  }
     }
     
@@ -226,23 +236,11 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
     
     
     func getUpcommingEventsURL() -> URL{
-        let fromDate = DateConverter2().dateFormater(date: Date()) //current
-        var dateComponent = DateComponents()
-        dateComponent.day = 365
-        let futureDate = Calendar.current.date(byAdding: dateComponent, to: Date())
-        let toDate = DateConverter2().dateFormater(date: futureDate!) //future
-        let url = URL(string: URLServiceForEvent(endPoint: SportsCollectionViewController.getEndPoint(), fromDate: "\(fromDate)",toDate:"\(toDate)",leagueID: LeaguesTableViewController.getLeagueId()).url)! //return after 10 days of today
-        return url
+        upcomingurl.getUpcommingEventsURL()
     }
     
     func getLatestResultsURL()-> URL{
-        let toDate = DateConverter2().dateFormater(date: Date()) //current
-        var dateComponent = DateComponents()
-        dateComponent.day = -730 //2years
-        let passedDate = Calendar.current.date(byAdding: dateComponent, to: Date())
-        let fromDate = DateConverter2().dateFormater(date: passedDate!) //passed
-        let url = URL(string: URLServiceForEvent(endPoint: SportsCollectionViewController.getEndPoint() , fromDate: "\(fromDate)" ,toDate: "\(toDate)",leagueID: LeaguesTableViewController.getLeagueId() ).url)!//<<<<<<<<<<<
-        return url
+        latesturl.getLatestResultsURL()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

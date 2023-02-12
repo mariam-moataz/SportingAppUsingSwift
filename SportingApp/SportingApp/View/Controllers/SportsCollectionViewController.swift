@@ -33,15 +33,6 @@ class SportsCollectionViewController: UICollectionViewController {
         
         cell!.imageVIew.image = UIImage(named: sports[indexPath.row].image!)
         cell!.sportLabel.text = sports[indexPath.row].name
-
-        
-        //
-        /*cell!.imageVIew.layer.borderWidth = 1
-        cell!.imageVIew.layer.masksToBounds = false
-        cell!.imageVIew.layer.borderColor = UIColor.black.cgColor
-        cell!.imageVIew.layer.cornerRadius = cell!.imageVIew.frame.height/2
-        cell!.imageVIew.clipsToBounds = true*/
-        //
         
         return cell!
     }
@@ -50,7 +41,6 @@ class SportsCollectionViewController: UICollectionViewController {
         
         let leaguesTableViewController : LeaguesTableViewController = self.storyboard?.instantiateViewController(withIdentifier: "leaguesTVC") as! LeaguesTableViewController
         
-        //leaguesTableViewController.endpoint = getSportEndPoint(endpoint: sports[indexPath.row].endPoint ?? "")
         if indexPath.row >= 4{
             SnackBar.make(in: self.view, message: "This sport will be add to application soon", duration: .lengthLong).setAction(with: "Close", action: nil).show()
         }
