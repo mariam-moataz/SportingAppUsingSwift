@@ -6,9 +6,9 @@
 //
 
 import XCTest
-
+@testable import SportingApp
 final class TestAPI: XCTestCase {
-
+    var load = LeagueDetailsViewModel()
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -31,5 +31,23 @@ final class TestAPI: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-
+//    func testLoad()
+//    {
+//        let expectation = expectation(description: "waiting for API")
+//        
+//        load.getLeageURL()-> URL {
+//            let url = URL(string: URLService(endPoint: SportsCollectionViewController.endpoint).url)!
+//            return url
+//        }
+//                XCTFail()
+//           expectation.fulfill()
+//                return
+//            }
+//      
+//            XCTAssertNotEqual(items.count, 0)
+//            expectation.fulfill()
+//
+//        })
+//        waitForExpectations(timeout: 6)
+//    }
 }

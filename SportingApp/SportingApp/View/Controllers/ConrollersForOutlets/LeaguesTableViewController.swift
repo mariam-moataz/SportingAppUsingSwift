@@ -8,7 +8,10 @@
 import UIKit
 import Kingfisher
 
-class LeaguesTableViewController: UITableViewController {
+class LeaguesTableViewController: UITableViewController , LeaguUrlProtocol {
+   
+    
+    var LeagueUrl : LeaguesUrl!
     var leguesDetailsTableViewController : LeguesDetailsTableViewController!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var leagues : [LeagueDetails]=[]
@@ -19,9 +22,10 @@ class LeaguesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.nipConfig(nipname: "TableViewCell", cellIdentifier: "cell")
+        LeagueUrl = LeaguesUrl()
         //nipFileConfig()
         viewModel = LeagueViewModel()
-        viewModel.getItems(url:getURL())
+        viewModel.getItems(url:getLeageURL())
         viewModel.bindResultToTableViewController = { () in  self.renderView(legues: self.viewModel.vmResult)}
     }
     
@@ -89,11 +93,6 @@ class LeaguesTableViewController: UITableViewController {
 }
 
 extension LeaguesTableViewController{
-    /*func nipFileConfig(){
-        let nib = UINib(nibName: "TableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "cell")
-    }*/
-    
     func renderView(legues: [LeagueDetails]?){
         guard let newItems = legues else{return}
         self.leagues = newItems
@@ -102,11 +101,10 @@ extension LeaguesTableViewController{
             self.tableView.reloadData()
         }
     }
-    func getURL()-> URL{
-        let url = URL(string: URLService(endPoint: SportsCollectionViewController.endpoint).url)!
-        return url
+    func getLeageURL() -> URL {
+        LeagueUrl.getLeageURL()
     }
-    
+
     static func getLeagueId() -> Int{
         return LeaguesTableViewController.leagueID
     }
