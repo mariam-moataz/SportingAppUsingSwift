@@ -385,9 +385,12 @@
 			children = (
 				C9886AF92994D1D100E2D989 /* ConrollersForOutlets */,
 				C958D42D2989A3D1006E82C4 /* FavoriteTableViewController.swift */,
+				0366BDFF2997ADA5003F2AB1 /* LegueDetailsViewController.swift */,
 				C90BE0D329967DF300AE7892 /* LatestResultTableViewCell.swift */,
 				C958D4232989874B006E82C4 /* SportsCollectionViewController.swift */,
 				C90BE0D129967DD100AE7892 /* TeamDetailsViewController.swift */,
+				C90BE0CF29967DB800AE7892 /* PlayerdetailsViewController.swift */,
+				C90C21972989BEEE004CBC90 /* LeaguesTableViewController.swift */,
 				03CF15A42989E0BA0070AE16 /* UpCommingTableViewCell.swift */,
 				03CF15A82989E3690070AE16 /* LeguesDetailsTableViewController.swift */,
 				03C06934298A97A500322593 /* TeamsHorizintalTableViewCell.swift */,
@@ -428,10 +431,7 @@
 		C9886AF92994D1D100E2D989 /* ConrollersForOutlets */ = {
 			isa = PBXGroup;
 			children = (
-				0366BDFF2997ADA5003F2AB1 /* LegueDetailsViewController.swift */,
-				C90C21972989BEEE004CBC90 /* LeaguesTableViewController.swift */,
 				C90BE0D529967E0A00AE7892 /* LatestVerCollectionViewCell.swift */,
-				C90BE0CF29967DB800AE7892 /* PlayerdetailsViewController.swift */,
 				C94121B4298AF43C00665DA7 /* SportCollectionViewCell.swift */,
 				C958D41F298986F8006E82C4 /* SportsCollectionViewCell.swift */,
 				C958D4292989A14F006E82C4 /* TableViewCell.swift */,

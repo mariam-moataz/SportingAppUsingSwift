@@ -56,17 +56,6 @@ class LeaguesTableViewController: UITableViewController , LeaguUrlProtocol {
             cell.favoriteLeagueImage.image = UIImage(named: SportsCollectionViewController.endpoint)
         }
         cell.cellframe()
-        /*switch endpoint{
-        case "basketball":
-            cell.favoriteLeagueImage?.image = UIImage(named: "basketball")
-        case "cricket":
-            cell.favoriteLeagueImage?.image = UIImage(named: "cricket")
-        case "tennis":
-            cell.favoriteLeagueImage?.image = UIImage(named: "tennis")
-        default:
-            let url = URL(string: leagues[indexPath.row].league_logo ?? "")
-            cell.favoriteLeagueImage?.kf.setImage(with: url,placeholder: UIImage(named: "football"))
-        }*/
         return cell
     }
  
@@ -81,6 +70,7 @@ class LeaguesTableViewController: UITableViewController , LeaguUrlProtocol {
             let vc = segue.destination as? LegueDetailsViewController
             //LeguesDetailsTableViewController.leagueID = self.leagueID
             //vc!.endpoint = self.endpoint
+            
             vc!.league = leagues[index]
         }
     }

@@ -13,10 +13,14 @@ class LegueDetailsViewController: UIViewController ,UpcommingUrlProtocol , Lates
     @IBOutlet weak var latestCollection: UICollectionView!
     @IBOutlet weak var teamsOrPlayerCollection: UICollectionView!
     @IBOutlet weak var staroutlet: UIButton!
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     var latesturl : LatestURL!
     var upcomingurl : UpcomingUrl!
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var league : LeagueDetails!
+    static var leagueID : Int!
+    
     var upCommingViewModel : LeagueDetailsViewModel!
     var latestResultsViewModel : LeagueDetailsViewModel!
     var tennisViewModel : TennisDetailsViewModel!
@@ -29,11 +33,14 @@ class LegueDetailsViewController: UIViewController ,UpcommingUrlProtocol , Lates
     var teamkey : Int?
     var teamID : Int?
     var ref : DelegateForCell?
-static var leagueID : Int?
+    //static var leagueID : Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         latesturl = LatestURL()
         upcomingurl = UpcomingUrl()
+        
         self.view.addSubview(upcommingcollection)
         self.view.addSubview(latestCollection)
         self.view.addSubview(teamsOrPlayerCollection)
@@ -97,9 +104,10 @@ static var leagueID : Int?
         operation3.addDependency(operation2)
         
         queue.addOperations([operation1,operation2,operation3], waitUntilFinished: true)
-//        self.upcommingcollection.reloadData()
-//        self.latestCollection.reloadData()
-//        self.teamsOrPlayerCollection.reloadData()
+        if league.league_state == true
+        {
+            staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         if league.league_state == true
@@ -110,7 +118,7 @@ static var leagueID : Int?
     @IBAction func staract(_ sender: UIButton) {
         staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
         let saveToCoreViewModel = SavetoCoreViewModel()
-       // league.endpoint = SportsCollectionViewController.getEndPoint()
+        league.endpoint = SportsCollectionViewController.getEndPoint()
         league.league_state = true
         saveToCoreViewModel.callManagerToSave(league : league, appDelegate : appDelegate)
     }
@@ -247,7 +255,7 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
         if   collectionView == teamsOrPlayerCollection {
             print("selected")
             TeamDetailsViewController.teamId = self.teamID
-        var  teamdetails =   self.storyboard?.instantiateViewController(withIdentifier: "teamsViewController") as? TeamDetailsViewController
+            let  teamdetails =   self.storyboard?.instantiateViewController(withIdentifier: "teamsViewController") as? TeamDetailsViewController
             self.present(teamdetails!, animated: true)
             
         }
