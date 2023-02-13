@@ -18,6 +18,7 @@ class FavoriteTableViewController: UITableViewController {
     var network : Reachability!
     var leagues : [LeagueDetails]?
     var leagueID : Int!
+    var index : Int! //for navigation
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
@@ -52,7 +53,8 @@ class FavoriteTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
         cell.favoriteLeagueName?.text = leagues?[indexPath.row].league_name
-        cell.favoriteLeagueImage?.image = UIImage(named: "sports")
+        let url = URL(string: leagues?[indexPath.row].league_logo ?? "")
+        cell.favoriteLeagueImage?.kf.setImage(with: url,placeholder: UIImage(named: "sports"))
         cell.cellframe()
         return cell
     }
@@ -62,6 +64,7 @@ class FavoriteTableViewController: UITableViewController {
         network = Reachability.forInternetConnection()
         if network.isReachable(){
             leagueID = leagues?[indexPath.row].league_key
+            index = indexPath.row //for navigation
             performSegue(withIdentifier: "favoriteSegue", sender: nil)
         }
         else{
@@ -74,9 +77,13 @@ class FavoriteTableViewController: UITableViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is LeguesDetailsTableViewController{
-            _ = segue.destination as? LeguesDetailsTableViewController
-            //vc!.leagueID = leagueID
+        if segue.destination is LegueDetailsViewController{
+            let vc = segue.destination as? LegueDetailsViewController
+            //for navigation
+            vc!.league = leagues?[index]
+            SportsCollectionViewController.endpoint = leagues?[index].endpoint
+            LeaguesTableViewController.leagueID = leagueID
+            ///
         }
     }
     
