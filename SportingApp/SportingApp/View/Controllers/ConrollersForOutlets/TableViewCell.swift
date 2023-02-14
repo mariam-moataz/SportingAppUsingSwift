@@ -18,6 +18,13 @@ class TableViewCell: UITableViewCell {
         favoriteLeagueImage.layer.cornerRadius = favoriteLeagueImage.frame.width/2
         favoriteLeagueImage.clipsToBounds = true
         favoriteLeagueImage.image = UIImage(named: "load")
+        let accessoryImageFrame = CGRect(x: 0.0, y: 0.0,
+                                              width: 10.0, height: 40.0)
+        
+      //       let accessoryImageView = UIImageView(frame: accessoryImageFrame)
+      // accessoryImageView.image = UIImage(named: "AppIcon"  )
+        self.accessoryView?.backgroundColor = .green
+             //self.accessoryView = accessoryImageView
 
     }
 
