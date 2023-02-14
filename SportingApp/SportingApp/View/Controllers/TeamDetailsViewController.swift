@@ -28,8 +28,6 @@ class TeamDetailsViewController: UIViewController ,TeamURLProtocol {
         viewModel.getItems(url:getTeamURL())
         team = TeamDetails()
         viewModel.bindResultToTableViewController = { () in self.renderView(team: self.viewModel.vmResult )}
-//        teamlogoimg.layer.cornerRadius = teamlogoimg.frame.width/2
-//        teamlogoimg.clipsToBounds = true
       
         
     }

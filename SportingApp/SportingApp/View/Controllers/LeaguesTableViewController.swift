@@ -11,7 +11,6 @@ import Kingfisher
 class LeaguesTableViewController: UITableViewController , LeaguUrlProtocol {
    
     var LeagueUrl : LeaguesUrl!
-    var leguesDetailsTableViewController : LeguesDetailsTableViewController!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var leagues : [LeagueDetails]=[]
     var viewModel : LeagueViewModel!
