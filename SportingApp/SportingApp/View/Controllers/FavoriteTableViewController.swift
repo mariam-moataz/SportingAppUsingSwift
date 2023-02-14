@@ -94,13 +94,31 @@ class FavoriteTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let deleteViewModel = DeleteFromCoreViewModel()
-            deleteViewModel.callManagerToDelete(league: (leagues?[indexPath.row])!, appDelegate: appDelegate)
-            self.leagues?.remove(at: indexPath.row)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+//            let deleteViewModel = DeleteFromCoreViewModel()
+//            deleteViewModel.callManagerToDelete(league: (leagues?[indexPath.row])!, appDelegate: appDelegate)
+//            self.leagues?.remove(at: indexPath.row)
+//            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+//            
+//            tableView.reloadData()
+//            tabBarItem.badgeValue = String(leagues?.count ?? 0)
             
-            tableView.reloadData()
-            tabBarItem.badgeValue = String(leagues?.count ?? 0)
+            var alert = UIAlertController(title:"Take Care !" , message: "do you want to delete this league?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default , handler: { [self] action in
+                let deleteViewModel = DeleteFromCoreViewModel()
+                        deleteViewModel.callManagerToDelete(league: (leagues?[indexPath.row])!, appDelegate: appDelegate)
+                          self.leagues?.remove(at: indexPath.row)
+                          self.tableView.deleteRows(at: [indexPath], with: .automatic)
+
+                         tableView.reloadData()
+                           tabBarItem.badgeValue = String(leagues?.count ?? 0)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel , handler: nil))
+            self.present(alert, animated: true)
+
+            
+            
+            
+            
 
       }
     }

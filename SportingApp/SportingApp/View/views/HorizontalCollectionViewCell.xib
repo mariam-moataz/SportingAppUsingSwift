@@ -16,31 +16,47 @@
                 <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t8K-JS-RP5">
-                        <rect key="frame" x="0.0" y="114" width="200" height="86"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                        <color key="textColor" red="0.84965673360000005" green="0.85231505610000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t8K-JS-RP5">
+                        <rect key="frame" x="0.0" y="88.666666666666686" width="200" height="108"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="108" id="eYa-t8-5X3"/>
+                            <constraint firstAttribute="width" constant="200" id="gyO-9V-rcm"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" fixedFrame="YES" text="time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaT-ir-w8f">
-                        <rect key="frame" x="34" y="11" width="133" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                        <color key="textColor" red="0.84965673360000005" green="0.85231505610000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaT-ir-w8f">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="32.333333333333336"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="date" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzA-QJ-NOv">
-                        <rect key="frame" x="8" y="68" width="192" height="35"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                        <color key="textColor" red="0.84965673360000005" green="0.85231505610000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzA-QJ-NOv">
+                        <rect key="frame" x="0.0" y="54.333333333333329" width="200" height="32.333333333333329"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="QaT-ir-w8f" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="3uk-p1-DlF"/>
+                <constraint firstAttribute="trailing" secondItem="QaT-ir-w8f" secondAttribute="trailing" id="9Sm-95-gMC"/>
+                <constraint firstItem="t8K-JS-RP5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Cqv-VZ-bmj"/>
+                <constraint firstItem="QaT-ir-w8f" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Lm2-3P-WIO"/>
+                <constraint firstItem="vzA-QJ-NOv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="MKB-kd-4cu"/>
+                <constraint firstItem="t8K-JS-RP5" firstAttribute="top" secondItem="vzA-QJ-NOv" secondAttribute="bottom" constant="2" id="Q3l-1v-A6H"/>
+                <constraint firstItem="vzA-QJ-NOv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="XR0-Fs-ebS"/>
+                <constraint firstAttribute="trailing" secondItem="QaT-ir-w8f" secondAttribute="trailing" id="eWr-ls-k84"/>
+                <constraint firstAttribute="trailing" secondItem="t8K-JS-RP5" secondAttribute="trailing" id="fCV-KW-kz8"/>
+                <constraint firstItem="QaT-ir-w8f" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="kOU-mQ-dmA"/>
+                <constraint firstItem="vzA-QJ-NOv" firstAttribute="top" secondItem="QaT-ir-w8f" secondAttribute="bottom" constant="22" id="q2A-re-n6q"/>
+                <constraint firstAttribute="trailing" secondItem="vzA-QJ-NOv" secondAttribute="trailing" id="wxu-6m-buZ"/>
+                <constraint firstAttribute="trailing" secondItem="vzA-QJ-NOv" secondAttribute="trailing" id="yCs-2c-xlr"/>
+            </constraints>
             <size key="customSize" width="389" height="414"/>
             <connections>
                 <outlet property="dateLabel" destination="vzA-QJ-NOv" id="i7Z-Kd-8pU"/>

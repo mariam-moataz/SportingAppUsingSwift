@@ -11,7 +11,10 @@ class EventDetails : Decodable{
     var event_key : Int?
     var event_date : String?
     var event_time : String?
+    var event_date_start: String?
+    var event_date_stop : String?
     var event_home_team : String?
+    var  event_away_final_result : String?
     var home_team_key : Int?
     var event_away_team : String?
     var away_team_key : Int?
