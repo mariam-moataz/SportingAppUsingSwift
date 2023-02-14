@@ -55,11 +55,10 @@ class SportsCollectionViewController: UICollectionViewController {
 extension SportsCollectionViewController : UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
         {
-        let w = collectionView.frame.size.width/2-30
-        let h = collectionView.frame.size.width/2-30
-            print(collectionView.frame.size.width/2-30)
-        return CGSize(width: w, height: h)
-            
+            let w = collectionView.frame.size.width/2-30
+            let h = collectionView.frame.size.width/2-30
+            //return CGSize(width: w, height: h)
+            return CGSize(width: (UIScreen.main.bounds.size.width/2.5), height: (UIScreen.main.bounds.size.width/2)-30)
         }
     
     static func getEndPoint() -> String{

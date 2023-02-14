@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
  
-class APIHandler
+class APIHandler : NetworkManagementProtocol
 {
     
     static let sharedInstance = APIHandler()
