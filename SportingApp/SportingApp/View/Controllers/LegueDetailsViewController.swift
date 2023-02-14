@@ -38,6 +38,10 @@ class LegueDetailsViewController: UIViewController ,UpcommingUrlProtocol , Lates
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        upcommingcollection.layer.borderColor = UIColor.darkGray.cgColor
+        upcommingcollection.layer.borderWidth = 8
+        upcommingcollection.layer.cornerRadius = 20
+        
         latesturl = LatestURL()
         upcomingurl = UpcomingUrl()
         
@@ -107,6 +111,7 @@ class LegueDetailsViewController: UIViewController ,UpcommingUrlProtocol , Lates
         if league.league_state == true
         {
             staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
+            staroutlet.isEnabled = false
         }
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -117,6 +122,7 @@ class LegueDetailsViewController: UIViewController ,UpcommingUrlProtocol , Lates
     }
     @IBAction func staract(_ sender: UIButton) {
         staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        showToastMessage(message: "added to favourite", color: .darkText)
         let saveToCoreViewModel = SavetoCoreViewModel()
         league.endpoint = SportsCollectionViewController.getEndPoint()
         league.league_state = true
@@ -162,26 +168,62 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
         
         if collectionView == self.upcommingcollection{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath)as! HorizontalCollectionViewCell
-            cell.eventNameLabel.text = upcommingEvents[indexPath.row].league_name
-            cell.dateLabel.text = upcommingEvents[indexPath.row].event_date
-            cell.timeLabel.text = upcommingEvents[indexPath.row].event_time
+            if SportsCollectionViewController.getEndPoint() == "cricket"
+            {
+                cell.eventNameLabel.text = upcommingEvents[indexPath.row].league_name
+                cell.dateLabel.text = upcommingEvents[indexPath.row].event_date_start
+                cell.timeLabel.text = upcommingEvents[indexPath.row].event_time
+            }
+            else {
+                cell.eventNameLabel.text = upcommingEvents[indexPath.row].league_name
+                cell.dateLabel.text = upcommingEvents[indexPath.row].event_date
+                cell.timeLabel.text = upcommingEvents[indexPath.row].event_time
+            }
+            
             return cell
         }
         else if collectionView == self.latestCollection{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellforcollection", for: indexPath) as! LatestVerCollectionViewCell
-            if SportsCollectionViewController.getEndPoint() == "tennis" {
-                cell.TimeLabel.text  = LatestResultTableViewCell.tennisResults[indexPath.row].event_time
-                cell.scoreLabel.text = LatestResultTableViewCell.tennisResults[indexPath.row].event_final_result
-                cell.teamNAmeLabel.text = LatestResultTableViewCell.tennisResults[indexPath.row].event_first_player ?? ""
-                cell.secondTeamName.text =  LatestResultTableViewCell.tennisResults[indexPath.row].event_second_player ?? ""
-                cell.datelabel.text = LatestResultTableViewCell.tennisResults[indexPath.row].event_date
-            }
-            else{
+            if SportsCollectionViewController.getEndPoint() == "football" {
                 cell.TimeLabel.text  = latestResults[indexPath.row].event_time
                 cell.scoreLabel.text = latestResults[indexPath.row].event_final_result
                 cell.teamNAmeLabel.text = latestResults[indexPath.row].event_home_team ?? ""
                 cell.secondTeamName.text = latestResults[indexPath.row].event_away_team ?? ""
                 cell.datelabel.text = latestResults[indexPath.row].event_date
+                let url = URL(string: self.latestResults[indexPath.row].home_team_logo ?? " ")
+                cell.homeTeamlogo?.kf.setImage(with: url,placeholder: UIImage(named: "player"))
+                
+                let url2 = URL(string: self.latestResults[indexPath.row].away_team_logo ?? " ")
+                cell.awayteamlogo?.kf.setImage(with: url2,placeholder: UIImage(named: "player"))
+                
+            }
+            else{
+                if SportsCollectionViewController.getEndPoint() == "cricket"
+                {
+                    cell.TimeLabel.text  = latestResults[indexPath.row].event_time
+                    cell.datelabel.text = latestResults[indexPath.row].event_date_start
+                    cell.scoreLabel.text = latestResults[indexPath.row].event_away_final_result
+                    cell.teamNAmeLabel.text = latestResults[indexPath.row].event_home_team ?? ""
+                    cell.secondTeamName.text = latestResults[indexPath.row].event_away_team ?? ""
+                    let url = URL(string: self.latestResults[indexPath.row].event_home_team_logo ?? " ")
+                    cell.homeTeamlogo?.kf.setImage(with: url,placeholder: UIImage(named: "player"))
+                    
+                    let url2 = URL(string: self.latestResults[indexPath.row].event_away_team_logo ?? " ")
+                    cell.awayteamlogo?.kf.setImage(with: url2,placeholder: UIImage(named: "player"))
+                }
+                else {
+                    cell.TimeLabel.text  = latestResults[indexPath.row].event_time
+                    cell.scoreLabel.text = latestResults[indexPath.row].event_final_result
+                    cell.teamNAmeLabel.text = latestResults[indexPath.row].event_home_team ?? ""
+                    cell.secondTeamName.text = latestResults[indexPath.row].event_away_team ?? ""
+                    cell.datelabel.text = latestResults[indexPath.row].event_date
+                    let url = URL(string: self.latestResults[indexPath.row].event_home_team_logo ?? " ")
+                    cell.homeTeamlogo?.kf.setImage(with: url,placeholder: UIImage(named: "player"))
+                    
+                    let url2 = URL(string: self.latestResults[indexPath.row].event_away_team_logo ?? " ")
+                    cell.awayteamlogo?.kf.setImage(with: url2,placeholder: UIImage(named: "player"))
+                }
+               
             }
             return cell
         }
@@ -205,7 +247,7 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
         if  collectionView == self.latestCollection
-        { return CGSize(width:400, height: 250)}
+        { return CGSize(width:450, height: 250)}
         else {  return CGSize(width:200, height: 200)  }
     }
     
@@ -260,4 +302,22 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
             
         }
     }
+    func showToastMessage(message: String, color: UIColor) {
+            let toastLabel = UILabel(frame: CGRect(x: view.frame.width / 2 - 120, y: view.frame.height - 130, width: 260, height: 30))
+
+            toastLabel.textAlignment = .center
+            toastLabel.backgroundColor = color
+            toastLabel.textColor = .white
+            toastLabel.alpha = 1.0
+            toastLabel.layer.cornerRadius = 10
+            toastLabel.clipsToBounds = true
+            toastLabel.text = message
+            view.addSubview(toastLabel)
+
+            UIView.animate(withDuration: 3.0, delay: 1.0, options: .curveEaseIn, animations: {
+                toastLabel.alpha = 0.0
+            }) { _ in
+                toastLabel.removeFromSuperview()
+            }
+        }
 }

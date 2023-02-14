@@ -70,8 +70,18 @@ extension LatestResultTableViewCell : UICollectionViewDelegate , UICollectionVie
             cell.TimeLabel.text  = LatestResultTableViewCell.latestResults[indexPath.row].event_time
             cell.scoreLabel.text = LatestResultTableViewCell.latestResults[indexPath.row].event_final_result
             cell.teamNAmeLabel.text = LatestResultTableViewCell.latestResults[indexPath.row].event_home_team ?? ""
+            
             cell.secondTeamName.text =  LatestResultTableViewCell.latestResults[indexPath.row].event_away_team ?? ""
             cell.datelabel.text = LatestResultTableViewCell.latestResults[indexPath.row].event_date
+            
+            let url = URL(string: LatestResultTableViewCell.latestResults[indexPath.row].home_team_logo ?? " ")
+            cell.homeTeamlogo?.kf.setImage(with: url,placeholder: UIImage(named: "player"))
+            
+            let url2 = URL(string: LatestResultTableViewCell.latestResults[indexPath.row].away_team_logo ?? " ")
+            cell.homeTeamlogo?.kf.setImage(with: url2,placeholder: UIImage(named: "player"))
+            
+            
+            
             return cell
         }
     }
