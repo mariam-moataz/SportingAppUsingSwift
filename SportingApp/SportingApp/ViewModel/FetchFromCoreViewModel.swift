@@ -11,8 +11,7 @@ import CoreData
 
 class FetchFromCoreViewModel{
     func callManagerToFetch(appDelegate : AppDelegate) -> [LeagueDetails]?{
-        let coreDataManager = CoreDataManager()
-        return coreDataManager.fetchCoreData(appDelegate: appDelegate)
+        return CoreDataManager.getCoreObj().fetchCoreData(appDelegate: appDelegate)
     }
 }
 

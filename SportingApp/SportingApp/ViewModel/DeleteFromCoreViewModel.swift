@@ -9,7 +9,6 @@ import Foundation
 
 class DeleteFromCoreViewModel{
     func callManagerToDelete(league: LeagueDetails, appDelegate : AppDelegate){
-        let coreDataManager = CoreDataManager()
-        coreDataManager.deleteItem(league: league, appDelegate: appDelegate)
+        CoreDataManager.getCoreObj().deleteItem(league: league, appDelegate: appDelegate)
     }
 }

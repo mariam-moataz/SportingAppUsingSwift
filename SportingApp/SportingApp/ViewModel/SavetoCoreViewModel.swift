@@ -9,7 +9,6 @@ import Foundation
 
 class SavetoCoreViewModel{
     func callManagerToSave(league: LeagueDetails, appDelegate: AppDelegate){
-        let saveManager = CoreDataManager()
-        saveManager.saveItems(league: league, appDelegate: appDelegate)
+        CoreDataManager.getCoreObj().saveItems(league: league, appDelegate: appDelegate)
     }
 }

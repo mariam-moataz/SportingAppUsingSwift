@@ -7,7 +7,11 @@
 
 import Foundation
 
-class LeagueDetails : Decodable{
+class LeagueDetails : Decodable,Equatable{
+    static func == (lhs: LeagueDetails, rhs: LeagueDetails) -> Bool {
+        return lhs.league_key == rhs.league_key
+    }
+    
     //fooball 
     var league_key : Int?
     var league_name : String?

@@ -9,6 +9,17 @@ import Foundation
 import CoreData
 
 class CoreDataManager : SavetoCoreProtocol,FetchFromCoreProtocol,DeleteFromCoreProtocol{
+       
+    private static var coreDataManager : CoreDataManager?
+    public static func getCoreObj() -> CoreDataManager{
+        if let obj = coreDataManager{
+            return obj
+        }
+        else{
+            coreDataManager = CoreDataManager()
+            return coreDataManager!
+        }
+    }
     
     func saveItems(league: LeagueDetails, appDelegate: AppDelegate) {
         let saveCoreData = SaveCoreData()

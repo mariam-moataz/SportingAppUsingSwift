@@ -10,6 +10,10 @@ import UIKit
 class SportCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageVIew: UIImageView!
-    
     @IBOutlet weak var sportLabel: UILabel!
+    
+    func cellConfig(sport:Sport){
+        self.imageVIew.image = UIImage(named: sport.image!)
+        self.sportLabel.text = sport.name
+    }
 }

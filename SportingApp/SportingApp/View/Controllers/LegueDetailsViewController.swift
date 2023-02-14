@@ -20,7 +20,7 @@ class LegueDetailsViewController: UIViewController ,UpcommingUrlProtocol , Lates
     var upcomingurl : UpcomingUrl!
     var league : LeagueDetails!
     static var leagueID : Int!
-    
+    var leaguesWithState : [LeagueDetails]?
     var upCommingViewModel : LeagueDetailsViewModel!
     var latestResultsViewModel : LeagueDetailsViewModel!
     var tennisViewModel : TennisDetailsViewModel!
@@ -33,14 +33,16 @@ class LegueDetailsViewController: UIViewController ,UpcommingUrlProtocol , Lates
     var teamkey : Int?
     var teamID : Int?
     var ref : DelegateForCell?
-    //static var leagueID : Int?
+    var fetchFromCoreViewModel : FetchFromCoreViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        upcommingcollection.layer.borderColor = UIColor.darkGray.cgColor
-        upcommingcollection.layer.borderWidth = 8
-        upcommingcollection.layer.cornerRadius = 20
+        fetchFromCoreViewModel = FetchFromCoreViewModel()
+        
+        leaguesWithState = fetchFromCoreViewModel?.callManagerToFetch(appDelegate: appDelegate) ?? []
+        
+        upcommingcollection.collectionViewConfig()
         
         latesturl = LatestURL()
         upcomingurl = UpcomingUrl()
@@ -60,73 +62,42 @@ class LegueDetailsViewController: UIViewController ,UpcommingUrlProtocol , Lates
         self.latestCollection.nipConfig(nipname: "LatestVerCollectionViewCell", cellIdentifier: "cellforcollection")
         self.teamsOrPlayerCollection.nipConfig(nipname: "TeamsCollectionViewCell", cellIdentifier: "cell2")
         
-        let queue = OperationQueue()
+        loadQueueOperations()
         
-        let operation1 = BlockOperation{
-            self.upCommingViewModel = LeagueDetailsViewModel()
-            self.upCommingViewModel.getItems(url:self.getUpcommingEventsURL())
-                        
-            self.upCommingViewModel.bindResultToTableViewController = { () in  self.upCommingCollectionRenderView(events: self.upCommingViewModel.vmResult)}
-            
-            print("1")
-            
-            OperationQueue.main.addOperation{
-                self.upcommingcollection.reloadData()
-                self.latestCollection.reloadData()
-                self.teamsOrPlayerCollection.reloadData()
-            }
-            //self.teamsArr = self.upcommingEvents + self.latestResults
-        }
         
-       
-        
-        let operation2 = BlockOperation{
-            if SportsCollectionViewController.getEndPoint() == "tennis"{
-                self.tennisViewModel = TennisDetailsViewModel()
-                self.tennisViewModel.getItems(url:self.getLatestResultsURL())
-                self.tennisViewModel.bindResultToTableViewController = { () in  self.renderViewForTennis(events: self.tennisViewModel.vmResult)}
-            }
-            else{
-                self.latestResultsViewModel = LeagueDetailsViewModel()
-                self.latestResultsViewModel.getItems(url:self.getLatestResultsURL())
-                self.latestResultsViewModel.bindResultToTableViewController = { () in  self.latestResultsCollectionRenderView(events: self.latestResultsViewModel.vmResult)}
-            }
-            print("2")
-        }
-        
-        operation2.addDependency(operation1)
-        
-        let operation3 = BlockOperation{
-            OperationQueue.main.addOperation {
-                self.upcommingcollection.reloadData()
-                self.latestCollection.reloadData()
-                self.teamsOrPlayerCollection.reloadData()
-            }
-            print("3")
-        }
-        
-        operation3.addDependency(operation2)
-        
-        queue.addOperations([operation1,operation2,operation3], waitUntilFinished: true)
         if league.league_state == true
         {
             staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
             staroutlet.isEnabled = false
         }
     }
+    
     override func viewWillAppear(_ animated: Bool) {
-        if league.league_state == true
-        {
-            staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        staroutlet.isEnabled = true
+        for league in leaguesWithState ?? []{
+            if self.league.league_key == league.league_key{
+                staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
+            }
         }
     }
+    
+    
     @IBAction func staract(_ sender: UIButton) {
-        staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
-        showToastMessage(message: "added to favourite", color: .darkText)
-        let saveToCoreViewModel = SavetoCoreViewModel()
-        league.endpoint = SportsCollectionViewController.getEndPoint()
-        league.league_state = true
-        saveToCoreViewModel.callManagerToSave(league : league, appDelegate : appDelegate)
+        for league in leaguesWithState ?? []{
+            if self.league.league_key == league.league_key{
+                staroutlet.isEnabled = false
+            }
+        }
+        
+        if staroutlet.isEnabled == true{
+            staroutlet.setImage(UIImage(systemName: "star.fill"), for: .normal)
+            showToastMessage(message: "added to favourite", color: .darkText)
+            let saveToCoreViewModel = SavetoCoreViewModel()
+            league.endpoint = SportsCollectionViewController.getEndPoint()
+            league.league_state = true
+            saveToCoreViewModel.callManagerToSave(league : league, appDelegate : appDelegate)
+        }
+        
     }
 }
     
@@ -168,76 +139,18 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
         
         if collectionView == self.upcommingcollection{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath)as! HorizontalCollectionViewCell
-            if SportsCollectionViewController.getEndPoint() == "cricket"
-            {
-                cell.eventNameLabel.text = upcommingEvents[indexPath.row].league_name
-                cell.dateLabel.text = upcommingEvents[indexPath.row].event_date_start
-                cell.timeLabel.text = upcommingEvents[indexPath.row].event_time
-            }
-            else {
-                cell.eventNameLabel.text = upcommingEvents[indexPath.row].league_name
-                cell.dateLabel.text = upcommingEvents[indexPath.row].event_date
-                cell.timeLabel.text = upcommingEvents[indexPath.row].event_time
-            }
+            cell.cellconfig(event: upcommingEvents[indexPath.row])
             
             return cell
         }
         else if collectionView == self.latestCollection{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellforcollection", for: indexPath) as! LatestVerCollectionViewCell
-            if SportsCollectionViewController.getEndPoint() == "football" {
-                cell.TimeLabel.text  = latestResults[indexPath.row].event_time
-                cell.scoreLabel.text = latestResults[indexPath.row].event_final_result
-                cell.teamNAmeLabel.text = latestResults[indexPath.row].event_home_team ?? ""
-                cell.secondTeamName.text = latestResults[indexPath.row].event_away_team ?? ""
-                cell.datelabel.text = latestResults[indexPath.row].event_date
-                let url = URL(string: self.latestResults[indexPath.row].home_team_logo ?? " ")
-                cell.homeTeamlogo?.kf.setImage(with: url,placeholder: UIImage(named: "player"))
-                
-                let url2 = URL(string: self.latestResults[indexPath.row].away_team_logo ?? " ")
-                cell.awayteamlogo?.kf.setImage(with: url2,placeholder: UIImage(named: "player"))
-                
-            }
-            else{
-                if SportsCollectionViewController.getEndPoint() == "cricket"
-                {
-                    cell.TimeLabel.text  = latestResults[indexPath.row].event_time
-                    cell.datelabel.text = latestResults[indexPath.row].event_date_start
-                    cell.scoreLabel.text = latestResults[indexPath.row].event_away_final_result
-                    cell.teamNAmeLabel.text = latestResults[indexPath.row].event_home_team ?? ""
-                    cell.secondTeamName.text = latestResults[indexPath.row].event_away_team ?? ""
-                    let url = URL(string: self.latestResults[indexPath.row].event_home_team_logo ?? " ")
-                    cell.homeTeamlogo?.kf.setImage(with: url,placeholder: UIImage(named: "player"))
-                    
-                    let url2 = URL(string: self.latestResults[indexPath.row].event_away_team_logo ?? " ")
-                    cell.awayteamlogo?.kf.setImage(with: url2,placeholder: UIImage(named: "player"))
-                }
-                else {
-                    cell.TimeLabel.text  = latestResults[indexPath.row].event_time
-                    cell.scoreLabel.text = latestResults[indexPath.row].event_final_result
-                    cell.teamNAmeLabel.text = latestResults[indexPath.row].event_home_team ?? ""
-                    cell.secondTeamName.text = latestResults[indexPath.row].event_away_team ?? ""
-                    cell.datelabel.text = latestResults[indexPath.row].event_date
-                    let url = URL(string: self.latestResults[indexPath.row].event_home_team_logo ?? " ")
-                    cell.homeTeamlogo?.kf.setImage(with: url,placeholder: UIImage(named: "player"))
-                    
-                    let url2 = URL(string: self.latestResults[indexPath.row].event_away_team_logo ?? " ")
-                    cell.awayteamlogo?.kf.setImage(with: url2,placeholder: UIImage(named: "player"))
-                }
-               
-            }
+            cell.cellconfig(event: latestResults[indexPath.row])
             return cell
         }
         else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! TeamsCollectionViewCell
-            if SportsCollectionViewController.getEndPoint() == "football" {
-                let url = URL(string: teamsArr[indexPath.row].home_team_logo ?? "")
-                cell.teamImg.kf.setImage(with: url,placeholder: UIImage(named: "teams"))
-            }
-            else {
-                let url = URL(string: teamsArr[indexPath.row].event_home_team_logo ?? "")
-                cell.teamImg.kf.setImage(with: url,placeholder: UIImage(named: "teams"))
-               
-            }
+            cell.cellConfig(event: teamsArr[indexPath.row])
             teamID = teamsArr[indexPath.row].home_team_key
             teamkey = teamsArr[indexPath.row].home_team_key
             return cell
@@ -247,11 +160,24 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
         if  collectionView == self.latestCollection
-        { return CGSize(width:450, height: 250)}
+        { return CGSize(width:400, height: 250)}
         else {  return CGSize(width:200, height: 200)  }
     }
     
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if   collectionView == teamsOrPlayerCollection {
+            print("selected")
+            TeamDetailsViewController.teamId = self.teamID
+            let  teamdetails =   self.storyboard?.instantiateViewController(withIdentifier: "teamsViewController") as? TeamDetailsViewController
+            self.present(teamdetails!, animated: true)
+            
+        }
+    }
+    
+}
+
+extension LegueDetailsViewController{
     
     
     func upCommingCollectionRenderView(events: [EventDetails]?){
@@ -273,7 +199,6 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
         }
     }
     
-    
     func renderViewForTennis(events: [TennisDetails]?){
         guard let newItems = events else{return}
         tennisResults = newItems
@@ -284,7 +209,6 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
         }
     }
     
-    
     func getUpcommingEventsURL() -> URL{
         upcomingurl.getUpcommingEventsURL()
     }
@@ -293,15 +217,6 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
         latesturl.getLatestResultsURL()
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if   collectionView == teamsOrPlayerCollection {
-            print("selected")
-            TeamDetailsViewController.teamId = self.teamID
-            let  teamdetails =   self.storyboard?.instantiateViewController(withIdentifier: "teamsViewController") as? TeamDetailsViewController
-            self.present(teamdetails!, animated: true)
-            
-        }
-    }
     func showToastMessage(message: String, color: UIColor) {
             let toastLabel = UILabel(frame: CGRect(x: view.frame.width / 2 - 120, y: view.frame.height - 130, width: 260, height: 30))
 
@@ -319,5 +234,53 @@ extension LegueDetailsViewController : UICollectionViewDelegate , UICollectionVi
             }) { _ in
                 toastLabel.removeFromSuperview()
             }
+    }
+    
+    func loadQueueOperations(){
+        let queue = OperationQueue()
+        
+        let operation1 = BlockOperation{
+            self.upCommingViewModel = LeagueDetailsViewModel()
+            self.upCommingViewModel.getItems(url:self.getUpcommingEventsURL())
+                        
+            self.upCommingViewModel.bindResultToTableViewController = { () in  self.upCommingCollectionRenderView(events: self.upCommingViewModel.vmResult)}
+            
+            
+            OperationQueue.main.addOperation{
+                self.upcommingcollection.reloadData()
+                self.latestCollection.reloadData()
+                self.teamsOrPlayerCollection.reloadData()
+            }
         }
+        
+       
+        
+        let operation2 = BlockOperation{
+            if SportsCollectionViewController.getEndPoint() == "tennis"{
+                self.tennisViewModel = TennisDetailsViewModel()
+                self.tennisViewModel.getItems(url:self.getLatestResultsURL())
+                self.tennisViewModel.bindResultToTableViewController = { () in  self.renderViewForTennis(events: self.tennisViewModel.vmResult)}
+            }
+            else{
+                self.latestResultsViewModel = LeagueDetailsViewModel()
+                self.latestResultsViewModel.getItems(url:self.getLatestResultsURL())
+                self.latestResultsViewModel.bindResultToTableViewController = { () in  self.latestResultsCollectionRenderView(events: self.latestResultsViewModel.vmResult)}
+            }
+        }
+        
+        operation2.addDependency(operation1)
+        
+        let operation3 = BlockOperation{
+            OperationQueue.main.addOperation {
+                self.upcommingcollection.reloadData()
+                self.latestCollection.reloadData()
+                self.teamsOrPlayerCollection.reloadData()
+            }
+        }
+        
+        operation3.addDependency(operation2)
+        
+        queue.addOperations([operation1,operation2,operation3], waitUntilFinished: true)
+    }
+    
 }

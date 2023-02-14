@@ -12,6 +12,7 @@ import CoreData
 class FetchCoreData{
     
     var formatter = ConvertToLeagueDetails()
+    
     func fetchFromCore(appDelegate : AppDelegate) -> [LeagueDetails]?{
         var leagues : [NSManagedObject] = []
         //2
@@ -27,6 +28,24 @@ class FetchCoreData{
         
         return formatter.convertToLeagueFormatter(nsManagedObject: leagues)
     }
+    
+    /*func fetchStateFromCore(appDelegate : AppDelegate) -> [LeagueDetails]?{
+        var leagues : [NSManagedObject] = []
+        //2
+        let managedContext = appDelegate.persistentContainer.viewContext
+        //3
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName:"LeagueDetailsEntity")
+        //4
+        let myPredicate = NSPredicate(format: "league_key == %@",)
+        fetchRequest.predicate = myPredicate
+        do{
+            leagues = try managedContext.fetch(fetchRequest)
+        }catch let error as NSError{
+            print("Error in Fetching: \n",error)
+        }
+        
+        return formatter.convertToLeagueFormatter(nsManagedObject: leagues)
+    }*/
 }
 
 

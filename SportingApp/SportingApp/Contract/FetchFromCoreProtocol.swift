@@ -6,8 +6,8 @@
 //
 
 import Foundation
-//import CoreData
 
 protocol FetchFromCoreProtocol{
     func fetchCoreData(appDelegate : AppDelegate) -> [LeagueDetails]?
+    //func fetchStateFromCore(appDelegate : AppDelegate) -> [LeagueDetails]?
 }

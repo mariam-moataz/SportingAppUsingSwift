@@ -23,7 +23,6 @@ class FavoriteTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //nipFileConfig()
         tableView.nipConfig(nipname: "TableViewCell", cellIdentifier: "cell")
         tableView.reloadData()
 
@@ -52,9 +51,7 @@ class FavoriteTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
-        cell.favoriteLeagueName?.text = leagues?[indexPath.row].league_name
-        let url = URL(string: leagues?[indexPath.row].league_logo ?? "")
-        cell.favoriteLeagueImage?.kf.setImage(with: url,placeholder: UIImage(named: "sports"))
+        cell.cellConfigFavorite(league: (leagues?[indexPath.row])!)
         cell.cellframe()
         return cell
     }
@@ -94,16 +91,10 @@ class FavoriteTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-//            let deleteViewModel = DeleteFromCoreViewModel()
-//            deleteViewModel.callManagerToDelete(league: (leagues?[indexPath.row])!, appDelegate: appDelegate)
-//            self.leagues?.remove(at: indexPath.row)
-//            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-//            
-//            tableView.reloadData()
-//            tabBarItem.badgeValue = String(leagues?.count ?? 0)
+            let alert = UIAlertController(title:"Take Care !" , message: "Do you want to delete this league?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel , handler: nil))
             
-            var alert = UIAlertController(title:"Take Care !" , message: "do you want to delete this league?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default , handler: { [self] action in
+            alert.addAction(UIAlertAction(title: "Yes", style: .default , handler: { [self] action in
                 let deleteViewModel = DeleteFromCoreViewModel()
                         deleteViewModel.callManagerToDelete(league: (leagues?[indexPath.row])!, appDelegate: appDelegate)
                           self.leagues?.remove(at: indexPath.row)
@@ -112,24 +103,11 @@ class FavoriteTableViewController: UITableViewController {
                          tableView.reloadData()
                            tabBarItem.badgeValue = String(leagues?.count ?? 0)
             }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel , handler: nil))
             self.present(alert, animated: true)
-
-            
-            
-            
-            
-
       }
     }
     
 }
 
-extension FavoriteTableViewController{
-   /* func nipFileConfig(){
-        let nib = UINib(nibName: "TableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "cell")
-    }*/
-}
 
 

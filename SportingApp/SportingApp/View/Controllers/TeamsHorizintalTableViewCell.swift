@@ -25,9 +25,6 @@ class TeamsHorizintalTableViewCell: UITableViewCell {
         teamsCollection.delegate = self
         teamsCollection.dataSource = self
         teamsCollection.nipConfig(nipname: "TeamsCollectionViewCell", cellIdentifier: "cell")
-        //let nib = UINib(nibName: "TeamsCollectionViewCell", bundle: nil)
-        //teamsCollection.register(nib, forCellWithReuseIdentifier: "cell")
-        //teamsCollection.reloadData()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -52,7 +49,6 @@ extension TeamsHorizintalTableViewCell : UICollectionViewDelegate , UICollection
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
         {
-            //(UIScreen.main.bounds.size.width/2.0)
            return CGSize(width:200, height: 200)
         }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

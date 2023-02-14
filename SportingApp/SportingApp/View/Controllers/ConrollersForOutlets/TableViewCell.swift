@@ -14,24 +14,32 @@ class TableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        //imageConfig()
+        
         favoriteLeagueImage.layer.cornerRadius = favoriteLeagueImage.frame.width/2
         favoriteLeagueImage.clipsToBounds = true
         favoriteLeagueImage.image = UIImage(named: "load")
-        let accessoryImageFrame = CGRect(x: 0.0, y: 0.0,
-                                              width: 10.0, height: 40.0)
-        
-      //       let accessoryImageView = UIImageView(frame: accessoryImageFrame)
-      // accessoryImageView.image = UIImage(named: "AppIcon"  )
-        self.accessoryView?.backgroundColor = .green
-             //self.accessoryView = accessoryImageView
 
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    }
+    
+    func cellConfig(league:LeagueDetails){
+        self.favoriteLeagueName?.text = league.league_name
+        if SportsCollectionViewController.endpoint == "football"{
+            let url = URL(string: league.league_logo ?? "")
+            self.favoriteLeagueImage?.kf.setImage(with: url,placeholder: UIImage(named: "football"))
+        }
+        else{
+            self.favoriteLeagueImage.image = UIImage(named: SportsCollectionViewController.endpoint)
+        }
+    }
+    
+    func cellConfigFavorite(league:LeagueDetails){
+        self.favoriteLeagueName?.text = league.league_name
+        let url = URL(string: league.league_logo ?? "")
+        self.favoriteLeagueImage?.kf.setImage(with: url,placeholder: UIImage(named: league.endpoint ?? "sports"))
     }
     
 }
@@ -40,12 +48,11 @@ class TableViewCell: UITableViewCell {
 
 extension TableViewCell{
     
-    func imageConfig(){
+    /*func imageConfig(){
         favoriteLeagueImage.layer.borderWidth = 1
         favoriteLeagueImage.layer.masksToBounds = false
         favoriteLeagueImage.layer.borderColor = UIColor.black.cgColor
         favoriteLeagueImage.layer.cornerRadius = favoriteLeagueImage.frame.height/2
         favoriteLeagueImage.clipsToBounds = true
-        
-    }
+    }*/
 }
