@@ -6,14 +6,41 @@
 //
 
 import XCTest
+import Alamofire
+import Foundation
+
 @testable import SportingApp
 final class TestAPI: XCTestCase {
-    var load = LeagueDetailsViewModel()
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    //var load = LeagueDetailsViewModel()
+    var objAPIHandler : APIHandler!
+    
+    
+    override func setUp(){
+        objAPIHandler = APIHandler()
     }
 
-    override func tearDownWithError() throws {
+    func testLoadDataFromURL(){ //endpoint = football
+        let expectation = expectation(description:"Waiting for API")
+        let footballUrl = "https://apiv2.allsportsapi.com/football/?met=Leagues&APIkey=6437cc9732c785914d4adaf9d36f18672470b1515d1bc8f1a4bfae02e151a7ef"
+        objAPIHandler.fetchApi(url: URL(string:footballUrl), resonsee: LeagueAPIResponse.self ) { result in
+            guard let result = result as? LeagueAPIResponse else {
+                XCTFail()
+                expectation.fulfill()
+                print("Fail")
+                return
+            }
+            XCTAssertNotEqual(result.result?.count, 0, "API Failed")
+            print("Nill")
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 60)
+        print("Time out")
+        //waitForExpectations(timeout: 60, handler: nil)
+        
+    }
+    
+    override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
