@@ -11,12 +11,56 @@ import SnackBar_swift
 
 class SportsCollectionViewController: UICollectionViewController {
     
+    var imageView : UIImageView = {
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
+        imageView.image = UIImage(named: "logo2")
+        return imageView
+    }()
+    
     var sports = getSports()
     static var endpoint : String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //view.addSubview(imageView)
     }
 
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        imageView.center = view.center
+//        DispatchQueue.main.asyncAfter(deadline: .now()+3) {
+//            self.animate()
+//        }
+//        DispatchQueue.main.as(execute: .now()+3) {
+//            self.animate()
+//        }
+   // }
+    
+//    private func animate(){
+//        UIView.animate(withDuration: 7, animations: {
+//            let size = self.view.frame.size.width * 3
+//            let diffx = size - self.view.frame.size.width
+//            let diffy = self.view.frame.size.height - size
+//
+//            self.imageView.frame = CGRect(x: -(diffx/2), y: (diffy/2), width: size, height: size)
+//        })
+//
+//        UIView.animate(withDuration: 1.5, animations: {
+//            self.imageView.alpha = 0
+//        },completion: { done in
+//            if done{
+//                DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
+//                    let viewController = SportsCollectionViewController()
+//                    viewController.modalTransitionStyle = .crossDissolve
+//                    viewController.modalPresentationStyle = .fullScreen
+//                    self.present(viewController, animated: true)
+//                }
+//            }
+//
+//        })
+//
+//
+//    }
     
     // MARK: UICollectionViewDataSource
 
@@ -55,10 +99,7 @@ class SportsCollectionViewController: UICollectionViewController {
 extension SportsCollectionViewController : UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
         {
-            let w = collectionView.frame.size.width/2-30
-            let h = collectionView.frame.size.width/2-30
-            //return CGSize(width: w, height: h)
-            return CGSize(width: (UIScreen.main.bounds.size.width/2.5), height: (UIScreen.main.bounds.size.width/2)-30)
+            return CGSize(width: self.view.frame.width*0.499, height: self.view.frame.height*0.29)
         }
     
     static func getEndPoint() -> String{

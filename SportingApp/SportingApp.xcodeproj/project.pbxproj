@@ -92,6 +92,7 @@
 		C9B4610E299AB20700175BAF /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B4610D299AB20700175BAF /* MockNetworkManager.swift */; };
 		C9B46110299AB57E00175BAF /* NetworkManagementProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B4610F299AB57E00175BAF /* NetworkManagementProtocol.swift */; };
 		C9B46112299AB9E800175BAF /* MockNetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B46111299AB9E800175BAF /* MockNetworkManagerTests.swift */; };
+		C9F08638299BB47A00DE891C /* LaunchScreenAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F08637299BB47A00DE891C /* LaunchScreenAnimationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,6 +206,7 @@
 		C9B4610D299AB20700175BAF /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		C9B4610F299AB57E00175BAF /* NetworkManagementProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagementProtocol.swift; sourceTree = "<group>"; };
 		C9B46111299AB9E800175BAF /* MockNetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManagerTests.swift; sourceTree = "<group>"; };
+		C9F08637299BB47A00DE891C /* LaunchScreenAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenAnimationViewController.swift; sourceTree = "<group>"; };
 		CDE133FEC3E15C09DCD73644 /* Pods_SportingApp_SportingAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SportingApp_SportingAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D70E54954B9D710E07935598 /* Pods_SportingAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SportingAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -395,6 +397,7 @@
 				03CF15A42989E0BA0070AE16 /* UpCommingTableViewCell.swift */,
 				03CF15A82989E3690070AE16 /* LeguesDetailsTableViewController.swift */,
 				03C06934298A97A500322593 /* TeamsHorizintalTableViewCell.swift */,
+				C9F08637299BB47A00DE891C /* LaunchScreenAnimationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -791,6 +794,7 @@
 				C9B46110299AB57E00175BAF /* NetworkManagementProtocol.swift in Sources */,
 				0366BE002997ADA5003F2AB1 /* LegueDetailsViewController.swift in Sources */,
 				C90BE0DE29969C2A00AE7892 /* DateConverter.swift in Sources */,
+				C9F08638299BB47A00DE891C /* LaunchScreenAnimationViewController.swift in Sources */,
 				C97F360029956296003D0683 /* CoreDataManager.swift in Sources */,
 				C905012E2994349700B9380E /* FetchFromCoreService.swift in Sources */,
 				0366BE10299824D6003F2AB1 /* UpcomingUrl.swift in Sources */,
@@ -992,6 +996,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SportingApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Spark;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1020,6 +1025,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SportingApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Spark;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

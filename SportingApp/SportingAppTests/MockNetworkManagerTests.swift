@@ -10,18 +10,24 @@ import XCTest
 
 final class MockNetworkManagerTests: XCTestCase {
 
-    var networkManager : NetworkManagementProtocol?
+    var networkManagerForLeagues : NetworkManagementProtocol?
+    var networkManagerForEvents : NetworkManagementProtocol?
+    var networkManagerForTeams : NetworkManagementProtocol?
     
     override func setUp(){
-        networkManager = MockNetworkManagerLeagueResponse()
+        networkManagerForLeagues = MockNetworkManagerLeagueResponse()
+        networkManagerForEvents = MockNetworkManagerEventResponse()
+        networkManagerForTeams = MockNetworkManagerTeamResponse()
     }
 
     override func tearDown(){
-        networkManager = nil
+        networkManagerForLeagues = nil
+        networkManagerForEvents = nil
+        networkManagerForTeams = nil
     }
 
     func testFetchApiWithLeagueResponse(){
-        networkManager!.fetchApi(url: URL(string: ""), resonsee: LeagueAPIResponse.self){ result in
+        networkManagerForLeagues!.fetchApi(url: URL(string: ""), resonsee: LeagueAPIResponse.self){ result in
             guard let result = result as? LeagueAPIResponse else {
                 XCTFail()
                 return
@@ -31,7 +37,7 @@ final class MockNetworkManagerTests: XCTestCase {
     }
     
     func testFetchApiWithEventResponse(){
-        networkManager!.fetchApi(url: URL(string: ""), resonsee: EventAPIResponse.self){ result in
+        networkManagerForEvents!.fetchApi(url: URL(string: ""), resonsee: EventAPIResponse.self){ result in
             guard let result = result as? EventAPIResponse else {
                 XCTFail()
                 return
@@ -41,7 +47,7 @@ final class MockNetworkManagerTests: XCTestCase {
     }
     
     func testFetchApiWithTeamResponse(){
-        networkManager!.fetchApi(url: URL(string: ""), resonsee: TeamAPIResponse.self){ result in
+        networkManagerForTeams!.fetchApi(url: URL(string: ""), resonsee: TeamAPIResponse.self){ result in
             guard let result = result as? TeamAPIResponse else {
                 XCTFail()
                 return
